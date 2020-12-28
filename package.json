@@ -1,7 +1,6 @@
 {
   "name": "orinoco",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "watch": "node ./node_modules/gulp/bin/gulp.js watch",
@@ -19,6 +18,13 @@
   },
   "homepage": "https://github.com/Dutdut77/GRANDMAIRENicolas_5_28122020#readme",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "browser-sync": "^2.26.13",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-include": "^2.2.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1"
   }
 }
