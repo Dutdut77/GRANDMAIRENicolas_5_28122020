@@ -1,15 +1,21 @@
 class Cart{
 
     content=[];
-
+ 
     constructor(domTarget){
-        this.DOM = document.createElement("cart");
-        domTarget.appendChild(this.DOM);
+        
+        this.DOM = document.createElement("cart");   
+        this.domTarget=domTarget;
         this.render();
     }
 
-    render(){
-        this.DOM.innerText = this.content.length;
+    render(){  
+        
+        if (this.content.length > 0) {
+               this.domTarget.appendChild(this.DOM);
+               this.DOM.innerText = this.content.length;  
+        }
+            
     }
 
     add(productId){
