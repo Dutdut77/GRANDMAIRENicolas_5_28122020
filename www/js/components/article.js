@@ -34,7 +34,7 @@ class Article{
     }
 
     afficheDetails(){
-        return  `
+                return  `
         <div class="card-produit">
         <div class="produit_image" style="background-image: url('${this.imageUrl}');"></div>
         <div class="produit_content">
@@ -57,14 +57,22 @@ class Article{
     
     
         <div class="produit_bouton">
-        <div class="produit_btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
+        <div class="produit_btn" onclick="orinoco.components.ajoutPanier()">Ajouter au Panier</div>
         </div>
         </div>
              `;
     }
 
     changePage(){    
-      new Storage(this);
+      orinoco.storage.addProduit(this);
       window.open("produit.html", "_self");
     }
+
+    ajoutPanier(){            
+        orinoco.cart.add(this._id);
+        orinoco.storage.addPanier(this._id);
+      }
+
+
+
 }

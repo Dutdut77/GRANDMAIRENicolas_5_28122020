@@ -1,9 +1,19 @@
 const orinoco = {
     dataManager: new DataManager("http://localhost:3000/api/cameras"),
     cart: new Cart(document.querySelector(".shopping_cart")),
-    storage: "orinoco.cart.content",
+    storage: new Storage(),
     components: {}
+   
 }
+
+if (localStorage.getItem("Panier") == null)    {
+    panier = [];
+}
+else {
+      panier = [localStorage.getItem("Panier")]; 
+}
+ 
+
 
 
 var nom_url = window.location.pathname;

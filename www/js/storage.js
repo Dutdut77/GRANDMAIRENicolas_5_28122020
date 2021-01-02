@@ -1,21 +1,23 @@
 class Storage{
+  
 
-
-    constructor(data){
-        this.data = data;
-        this.addProduit();
+    constructor(){ 
         
     }
 
 
-    addProduit (){
-        let produitStorage = JSON.stringify(this.data);
+    addProduit (data){        
+        const produitStorage = JSON.stringify(data);
         localStorage.setItem('Produit', produitStorage);
     }
 
     addPanier (){
-        let cartStorage = JSON.stringify(orinoco.cart.content);
-        localStorage.setItem('Panier', cartStorage);
+
+        panier.unshift(orinoco.cart.content);
+        //const cartStorage = JSON.stringify(panier);
+        localStorage.removeItem('Panier');
+        localStorage.setItem('Panier', panier);
+
     }
 
 

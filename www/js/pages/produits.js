@@ -17,7 +17,7 @@ class Prod {
           const products = JSON.parse(window.localStorage.getItem("Produit"));
           orinoco.components = new Article(products);
           content =  orinoco.components.afficheDetails();
-          domTarget.innerHTML = content;  
+          domTarget.innerHTML = content;   
          
     }
 
