@@ -22,10 +22,10 @@ class Home {
     async getData(domTarget) {
         let content = "";
 
-        const products  = await orinoco.dataManager.getAllProducts();
-        for (let i=0, size = products.length; i<size; i++){
-            orinoco.components["composant_"+products[i]._id]  = new Article(products[i]);
-            content +=  orinoco.components["composant_"+products[i]._id].afficheResume();
+        const products = await orinoco.dataManager.getAllProducts();
+        for (let i = 0, size = products.length; i < size; i++) {
+            orinoco.components["composant_" + products[i]._id] = new Article(products[i]);
+            content += orinoco.components["composant_" + products[i]._id].afficheResume();
         }
         domTarget.innerHTML = content;
     }

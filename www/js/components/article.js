@@ -1,35 +1,35 @@
-class Article{
+class Article {
 
     description;
-    imageUrl; 
+    imageUrl;
     lenses;
     name;
     price;
     _id;
 
 
-    constructor(specs){
-        for(const [key, value] of Object.entries(specs)){
+    constructor(specs) {
+        for (const [key, value] of Object.entries(specs)) {
             this[key] = value;
         }
     }
 
-    afficheSelect(){
+    afficheSelect() {
         if (orinoco.productsCamera == this._id) {
-        return  `
+            return `
         <option selected value="${this._id}"> ${this.name}</option>
              `;
         }
         else {
-            return  `
+            return `
         <option value="${this._id}"> ${this.name}</option>
-             `; 
+             `;
         }
-        
+
     }
 
-    afficheResume(){
-        return  `
+    afficheResume() {
+        return `
         <div class="card">
         <div class="list_image" style="background-image: url('${this.imageUrl}');"></div>
         <div class="list_content">
@@ -47,8 +47,8 @@ class Article{
              `;
     }
 
-    afficheDetails(){
-                return  `
+    afficheDetails() {
+        return `
         <div class="card-produit">
         <div class="produit_image" style="background-image: url('${this.imageUrl}');"></div>
         <div class="produit_content">
@@ -89,15 +89,15 @@ class Article{
              `;
     }
 
-    changePage(){    
-      orinoco.storage.addProduit(this._id);
-      window.open("produit.html", "_self");
+    changePage() {
+        orinoco.storage.addProduit(this._id);
+        window.open("produit.html", "_self");
     }
 
-    ajoutPanier(){            
+    ajoutPanier() {
         orinoco.cart.add(this._id);
         orinoco.storage.addPanier(this._id);
-      }
+    }
 
 
 
