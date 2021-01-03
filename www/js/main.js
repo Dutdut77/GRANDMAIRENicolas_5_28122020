@@ -3,8 +3,8 @@ const orinoco = {
     cart: new Cart(document.querySelector(".shopping_cart")),
     storage: new Storage(),
     components: {},
-    productsCamera: localStorage.getItem("Produit"),
-    panier : localStorage.getItem("Panier")
+    productsCamera: localStorage.getItem("Produit")
+   
 }
 
 
@@ -31,11 +31,14 @@ if (nom_url == "produit.html") {
 
     new Prod(document.querySelector("div.produit"));
 
-}
-
 
 const elt = document.querySelector("select.camera");   // On récupère l'élément sur lequel on veut détecter le clic    
 elt.addEventListener('change', function () {          // On écoute l'événement change
     orinoco.productsCamera = event.target.value;         // On ajoute le nouvel id dans la variable.
     new Prod(document.querySelector("div.produit"));     //On relanceune instance de Prod.
 });
+    
+
+}
+
+
