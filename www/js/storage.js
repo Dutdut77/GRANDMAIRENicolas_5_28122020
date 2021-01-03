@@ -7,15 +7,16 @@ class Storage{
 
 
     addProduit (data){        
-        const produitStorage = JSON.stringify(data);
-        localStorage.setItem('Produit', produitStorage);
+       // const produitStorage = JSON.stringify(data);
+        localStorage.setItem('Produit', data);
     }
 
-    addPanier (){
-
-        panier.unshift(orinoco.cart.content);
-        //const cartStorage = JSON.stringify(panier);
+    addPanier (data){
+        
         localStorage.removeItem('Panier');
+        panier.push(data);
+        //const cartStorage = JSON.stringify(panier);
+        
         localStorage.setItem('Panier', panier);
 
     }

@@ -1,4 +1,4 @@
-class Home {
+class Select {
 
     /**
      * insert la page d'accueil 
@@ -25,8 +25,9 @@ class Home {
         const products  = await orinoco.dataManager.getAllProducts();
         for (let i=0, size = products.length; i<size; i++){
             orinoco.components["composant_"+products[i]._id]  = new Article(products[i]);
-            content +=  orinoco.components["composant_"+products[i]._id].afficheResume();
+            content +=  orinoco.components["composant_"+products[i]._id].afficheSelect();
         }
         domTarget.innerHTML = content;
     }
 }
+

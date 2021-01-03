@@ -14,6 +14,20 @@ class Article{
         }
     }
 
+    afficheSelect(){
+        if (orinoco.productsCamera == this._id) {
+        return  `
+        <option selected value="${this._id}"> ${this.name}</option>
+             `;
+        }
+        else {
+            return  `
+        <option value="${this._id}"> ${this.name}</option>
+             `; 
+        }
+        
+    }
+
     afficheResume(){
         return  `
         <div class="card">
@@ -53,18 +67,30 @@ class Article{
                 </article>
                
             </div>
-      
+
+
+       
+
+            <select name="lenses" class="lenses">
+
+                <option value="">Choisissez une option :</option>
+
+                 
+                <option value="${this.lenses[0]}"> ${this.lenses[0]}</option>
+                <option value="${this.lenses[1]}"> ${this.lenses[1]}</option>
+                
+            </select>
     
     
         <div class="produit_bouton">
-        <div class="produit_btn" onclick="orinoco.components.ajoutPanier()">Ajouter au Panier</div>
+        <div class="produit_btn" onclick="orinoco.components.composant_${this._id}.ajoutPanier()">Ajouter au Panier</div>
         </div>
         </div>
              `;
     }
 
     changePage(){    
-      orinoco.storage.addProduit(this);
+      orinoco.storage.addProduit(this._id);
       window.open("produit.html", "_self");
     }
 
