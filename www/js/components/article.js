@@ -74,10 +74,8 @@ class Article {
             <select name="lenses" class="lenses">
 
                 <option value="">Choisissez une option :</option>
-
-                 
-                <option value="${this.lenses[0]}"> ${this.lenses[0]}</option>
-                <option value="${this.lenses[1]}"> ${this.lenses[1]}</option>
+                ${this.showVariants(this.lenses)}
+                
                 
             </select>
     
@@ -89,9 +87,19 @@ class Article {
              `;
     }
 
+    showVariants(variants){
+      let content = "";
+        for(let i=0, size = variants.length; i<size; i++){
+          content += `<option value="${this.lenses[i]}"> ${this.lenses[i]}</option>`
+        }
+        return content;
+    }
+
     changePage() {
-        orinoco.storage.addProduit(this._id);
-        window.open("produit.html", "_self");
+        // orinoco.storage.addProduit(this._id);
+        // window.location.href = window.location.pathname+"?produit_"+this._id;
+        orinoco.pageManager.changePage("produit_"+this._id)
+        // window.open("produit.html", "_self");
     }
 
     ajoutPanier() {

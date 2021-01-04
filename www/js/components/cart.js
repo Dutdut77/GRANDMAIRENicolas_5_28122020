@@ -1,6 +1,6 @@
 class Cart {
 
-    content = [];
+    content = orinoco.dataManager.reloadCart();
 
     constructor(domTarget) {
 
@@ -21,5 +21,6 @@ class Cart {
     add(productId) {
         this.content.push(productId);
         this.render();
+        orinoco.dataManager.saveCart(this.content);
     }
 }

@@ -1,4 +1,4 @@
-class Prod {
+class Produit {
 
     /**
      * insert la page d'accueil 
@@ -7,9 +7,8 @@ class Prod {
      *
      * @constructor
      */
-    constructor(domTarget) {
-
-        this.getData(domTarget);
+    constructor(domTarget, productId) {
+        this.getData(domTarget, productId);
     }
 
     /**
@@ -23,13 +22,14 @@ class Prod {
       }
       */
 
-    async getData(domTarget) {
-        let content = "";
-        const products = await orinoco.dataManager.getAllProducts();
-        //new Article(orinoco.components["composant_"+orinoco.productsCamera]);
-        content += orinoco.components["composant_" + orinoco.productsCamera].afficheDetails();
-        domTarget.innerHTML = content;
+    async getData(domTarget, productId) {
+        const specs = await orinoco.dataManager.getProduct(productId);
+        const produit = new Article(specs);
+        domTarget.innerHTML = produit.afficheDetails();
     }
+
+
+
 
 
 
