@@ -7,8 +7,8 @@ class Select {
      *
      * @constructor
      */
-    constructor(domTarget) {
-        this.getData(domTarget);
+    constructor() {
+        this.getData();
     }
 
 
@@ -19,15 +19,15 @@ class Select {
      * 
      * @returns {void}                     affiche dans le DOM
      */
-    async getData(domTarget) {
+    async getData() {
         let content = "";
 
         const products = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = products.length; i < size; i++) {
             orinoco.components["composant_" + products[i]._id] = new Article(products[i]);
-            content += orinoco.components["composant_" + products[i]._id].afficheSelect();
+            content += `<option value="${this.lenses[i]}"> ${this.lenses[i]}</option>`;
         }
-        domTarget.innerHTML = content;
+        return content;
     }
 }
 

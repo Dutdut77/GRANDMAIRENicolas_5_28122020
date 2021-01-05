@@ -14,7 +14,6 @@ class DataManager {
     }
 
     async getProduct(productId){
-      console.log(this.products);
         if (this.products !== null) return this.findInProducts(productId);
         const data = await fetch(this.src+"/"+productId);
         return await data.json();
@@ -37,4 +36,6 @@ class DataManager {
       if (content === null) return [];
       return JSON.parse(content);
     }
+
+
 }
