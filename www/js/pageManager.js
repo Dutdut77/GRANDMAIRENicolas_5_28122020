@@ -24,12 +24,12 @@ class PageManager {
   }
 
   showPage(nom_url) {
-    orinoco.components = {};
+   // orinoco.components = {};
 
-    if (nom_url === "") return this.page = new Home(this.domTarget);
-    // if (nom_url === "panier")       return this.page = new Home(this.domTarget);
+    if (nom_url === "")                             return this.page = new Home(this.domTarget);
+    if (nom_url === "panier")                       return this.page = new Panier(this.domTarget);
     // if (nom_url === "confirmation") return this.page = new Home(this.domTarget);    
-    if (nom_url.slice(0, 7) === "produit") return this.page = new Produit(this.domTarget, nom_url.slice(8));
+    if (nom_url.slice(0, 7) === "produit")          return this.page = new Produit(this.domTarget, nom_url.slice(8));
     this.page = new PageError();
 
   }

@@ -10,12 +10,12 @@
         <!-- pages -->
         <script src="js/pages/home.js"></script>
         <script src="js/pages/produit.js"></script>
+        <script src="js/pages/panier.js"></script>
         
         <!-- composants -->
         <script src="js/components/article.js"></script>
         <script src="js/components/cart.js"></script>
-        <script src="js/components/select.js"></script>
-
+       
         <!-- elements structurants -->
         <script src="js/dataManager.js"></script>
         <script src="js/pageManager.js"></script>
@@ -27,9 +27,7 @@
         <header>
             <div class="menu"></div>
             <a href="index.html"><img class="logo" src="/img/logo/orinoco.png" alt="Orinoco vente d'appareil photo"></a>
-            <div class="shopping_cart">
-                
-            </div>
+            <div class="shopping_cart" onclick="orinoco.pageManager.changePage('panier')"></div>
         </header>
 
 

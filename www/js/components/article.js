@@ -83,7 +83,7 @@ class Article {
     }
 
     selectCamera(productId) {        
-    orinoco.select.getData(productId);
+    //orinoco.select.getData(productId);
     }
 
 

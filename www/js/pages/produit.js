@@ -7,6 +7,8 @@ class Produit {
      *
      * @constructor
      */
+
+
     constructor(domTarget, productId) {
         
         this.getData(domTarget, productId);
