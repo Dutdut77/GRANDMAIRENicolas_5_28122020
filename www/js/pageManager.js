@@ -8,19 +8,6 @@ class PageManager {
     this.showPage(window.location.search.slice(1));
     window.onpopstate = () => this.showPage(window.location.search.slice(1));
 
-
-    //   new Prod(document.querySelector("div.produit"));
-
-
-    //   const elt = document.querySelector("select.camera");   // On récupère l'élément sur lequel on veut détecter le clic    
-    //   elt.addEventListener('change', function () {          // On écoute l'événement change
-    //     orinoco.productsCamera = event.target.value;         // On ajoute le nouvel id dans la variable.
-    //     new Prod(document.querySelector("div.produit"));     //On relanceune instance de Prod.
-    //   });
-
-
-    // }
-
   }
 
   showPage(nom_url) {

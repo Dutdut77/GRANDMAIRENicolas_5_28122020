@@ -37,9 +37,10 @@ class Article {
 
     afficheDetails() {
 
-           return `
+        return `
         <select name="camera" class="camera">
-        ${this.selectCamera(this._id)}
+        
+        ${this.selectCamera()}
         </select>
  
         <div class="card-produit">
@@ -79,12 +80,45 @@ class Article {
         for (let i = 0, size = variants.length; i < size; i++) {
             content += `<option value="${this.lenses[i]}"> ${this.lenses[i]}</option>`;
         }
+
         return content;
     }
 
-    selectCamera(productId) {        
-    //orinoco.select.getData(productId);
+    async aaselectCamera() {
+        let content = "";
+        let listeName = [];
+        const name = await orinoco.dataManager.getAllProducts();
+        for (let i = 0, size = name.length; i < size; i++) {
+            content += `<option value="${name[i].name}"> ${name[i].name}</option><br>`;
+        }
+
+        console.log(content);
+        
+        return content;
+
     }
+
+
+    selectCamera() {
+        let selectName = "";
+               fetch(orinoco.dataManager.src)
+            .then((res) => res.json())
+            .then((data) => {
+                for (let i = 0, size = data.length; i < size; i++) {
+                    selectName += "<option value=" + data[i].name + "> " + data[i].name + "</option>";
+
+                }
+                
+                //return selectName;
+
+            });
+
+        console.log(selectName);
+
+
+    }
+
+
 
 
     changePage() {

@@ -6,3 +6,4 @@ const orinoco = {
 
 orinoco.cart = new Cart(document.querySelector(".shopping_cart")),
 orinoco.pageManager = new PageManager(document.querySelector("main"));
+//orinoco.select

@@ -11,6 +11,7 @@ class DataManager {
         const data = await fetch(this.src);
         this.products = await data.json();
         return this.products;
+        
     }
 
     async getProduct(productId){
@@ -19,6 +20,7 @@ class DataManager {
         return await data.json();
 
     }
+    
 
     findInProducts(productId){
       for(let i=0, size = this.products.length; i<size; i++){
