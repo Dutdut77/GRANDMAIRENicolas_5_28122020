@@ -27,11 +27,12 @@ class Panier {
         let content = "";
 
         const productId = orinoco.dataManager.reloadCart();
-        console.log(productId.length);
         for (let i = 0, size = productId.length; i < size; i++) {
 
             const specs = await orinoco.dataManager.getProduct(productId[i]);
+            // console.log(specs);
             const produit = new Article(specs);
+            // console.log(produit);
             content += produit.affichePanier();
 
         }
