@@ -21,25 +21,23 @@ class Panier {
      */
 
 
-  
 
-    async getData(domTarget) {  
+
+    async getData(domTarget) {
         let content = "";
-    
+
         const productId = orinoco.dataManager.reloadCart();
         console.log(productId.length);
-            for (let i = 0, size = productId.length; i < size; i++) {
-               
-                    const specs = await orinoco.dataManager.getProduct(productId[i]);
-                    const produit = new Article(specs);
-                    content += produit.affichePanier();
-                   
-                }
-                domTarget.innerHTML = content;
+        for (let i = 0, size = productId.length; i < size; i++) {
 
-           // content += content[i];
+            const specs = await orinoco.dataManager.getProduct(productId[i]);
+            const produit = new Article(specs);
+            content += produit.affichePanier();
+
         }
-      //  domTarget.innerHTML = content;
-  
- 
- }
+        domTarget.innerHTML = content;
+
+    }
+
+
+}
