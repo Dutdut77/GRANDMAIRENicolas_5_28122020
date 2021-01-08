@@ -1,4 +1,4 @@
-class Panier{
+class Panier {
 
     /**
      * insert la page d'accueil 
@@ -23,17 +23,23 @@ class Panier{
 
   
 
-    async getData(domTarget) {
+    async getData(domTarget) {  
         let content = "";
-        let products = "";
-        content = orinoco.dataManager.reloadCart();
-        //const products = await orinoco.dataManager.getAllProducts();
-        for (let i = 0, size = content.length; i < size; i++) {
-            products = new Article(orinoco.components.composant_content[i]);
-            content += products.afficheResume();
+    
+        const productId = orinoco.dataManager.reloadCart();
+        console.log(productId.length);
+            for (let i = 0, size = productId.length; i < size; i++) {
+               
+                    const specs = await orinoco.dataManager.getProduct(productId[i]);
+                    const produit = new Article(specs);
+                    content += produit.affichePanier();
+                   
+                }
+                domTarget.innerHTML = content;
+
+           // content += content[i];
         }
-        domTarget.innerHTML = content;
+      //  domTarget.innerHTML = content;
   
-  
-  console.log(content)  }
-}
+ 
+ }

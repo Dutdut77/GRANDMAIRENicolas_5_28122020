@@ -75,6 +75,45 @@ class Article {
              `;
     }
 
+
+    affichePanier() {
+
+        return `
+    
+ 
+        <div class="card-produit">
+
+            <div class="produit_image" style="background-image: url('${this.imageUrl}');"></div>
+            
+            <div class="produit_content">
+                <div class="produit_titre">
+                    <h3>${this.name}</h3>
+                </div>
+                <div class="produit_prix">
+                     ${this.price} € 
+                </div>  
+            </div>
+ 
+            <div class="produit_desc">
+                <article>
+                ${this.description}
+                </article>             
+            </div>     
+            
+            <select name="lenses" class="lenses">
+                <option value="">Choisissez une option :</option>
+                ${this.showVariants(this.lenses)}      
+            </select>
+            
+            <div class="produit_bouton">
+                <div class="produit_btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
+            </div>
+
+        </div>
+             `;
+    }
+
+
     showVariants(variants) {
         let content = "";
         for (let i = 0, size = variants.length; i < size; i++) {
@@ -92,25 +131,24 @@ class Article {
             listeName = new Article(name[i]);
             if (nameSelect === listeName.name) {
                 content += "<option selected value=" + listeName._id + "> " + listeName.name + "</option>";
-                
+
             }
             else {
                 content += "<option value=" + listeName._id + "> " + listeName.name + "</option>";
-                
+
             }
 
-            
+
         }
 
         //console.log(content); 
         document.querySelector(domTarget).innerHTML = content; // Pourquoi je ne peux pas mettre domTarget query selector dans une variable ????
         // return content;       Pourquoi un simple return content ne fonctionne pas. Comme par exemple la fonction showVariants. ????????
 
-        document.querySelector(domTarget).addEventListener( 'change' , (event) => {
+        document.querySelector(domTarget).addEventListener('change', (event) => {
             orinoco.pageManager.changePage("produit_" + event.target.value);
-          
         });
-    
+
     }
 
 
@@ -143,9 +181,6 @@ class Article {
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id)
     }
-
-
-    
 
 
 }
