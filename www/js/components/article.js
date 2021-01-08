@@ -38,9 +38,9 @@ class Article {
     afficheDetails() {
 
         return `
-        <select name="camera" class="camera">
-        
-        ${this.selectCamera()}
+        <select name="camera" class="camera">        
+            ${this.selectCamera('select.camera', this.name)}
+          
         </select>
  
         <div class="card-produit">
@@ -84,46 +84,68 @@ class Article {
         return content;
     }
 
-    async aaselectCamera() {
+    async selectCamera(domTarget, nameSelect) {
         let content = "";
-        let listeName = [];
+        let listeName = "";
         const name = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = name.length; i < size; i++) {
-            content += `<option value="${name[i].name}"> ${name[i].name}</option><br>`;
+            listeName = new Article(name[i]);
+            if (nameSelect === listeName.name) {
+                content += "<option selected value=" + listeName._id + "> " + listeName.name + "</option>";
+                
+            }
+            else {
+                content += "<option value=" + listeName._id + "> " + listeName.name + "</option>";
+                
+            }
+
+            
         }
 
-        console.log(content);
-        
-        return content;
+        //console.log(content); 
+        document.querySelector(domTarget).innerHTML = content; // Pourquoi je ne peux pas mettre domTarget query selector dans une variable ????
+        // return content;       Pourquoi un simple return content ne fonctionne pas. Comme par exemple la fonction showVariants. ????????
 
+        document.querySelector(domTarget).addEventListener( 'change' , (event) => {
+            orinoco.pageManager.changePage("produit_" + event.target.value);
+          
+        });
+    
     }
 
 
-    selectCamera() {
-        let selectName = "";
-               fetch(orinoco.dataManager.src)
-            .then((res) => res.json())
-            .then((data) => {
-                for (let i = 0, size = data.length; i < size; i++) {
-                    selectName += "<option value=" + data[i].name + "> " + data[i].name + "</option>";
-
-                }
-                
-                //return selectName;
-
-            });
-
-        console.log(selectName);
 
 
-    }
 
 
+    /**
+        aaselectCamera() {
+            let selectName = "";
+                   fetch(orinoco.dataManager.src)
+                .then((res) => res.json())
+                .then((data) => {
+                    for (let i = 0, size = data.length; i < size; i++) {
+                        selectName += "<option value=" + data[i].name + "> " + data[i].name + "</option>";
+    
+                    }
+                    
+                    //return selectName;
+    
+                });
+    
+            console.log(selectName);
+    
+    
+        }
+     */
 
 
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id)
     }
+
+
+    
 
 
 }

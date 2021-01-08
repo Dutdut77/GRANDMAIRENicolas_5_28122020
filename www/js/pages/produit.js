@@ -20,6 +20,7 @@ class Produit {
         const specs = await orinoco.dataManager.getProduct(productId);
         const produit = new Article(specs); 
         domTarget.innerHTML = produit.afficheDetails();
+    
     }
 
     
