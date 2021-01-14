@@ -38,11 +38,6 @@ class Article {
     afficheDetails() {
 
         return `
-        <select name="camera" class="camera">        
-            ${this.selectCamera('select.camera', this.name)}
-          
-        </select>
- 
         <div class="card-produit">
 
             <div class="produit_image" style="background-image: url('${this.imageUrl}');"></div>
@@ -163,33 +158,33 @@ class Article {
         return content;
     }
 
-    async selectCamera(domTarget, nameSelect) {
-        let content = "";
-        let listeName = "";
-        const name = await orinoco.dataManager.getAllProducts();
-        for (let i = 0, size = name.length; i < size; i++) {
-            listeName = new Article(name[i]);
-            if (nameSelect === listeName.name) {
-                content += "<option selected value=" + listeName._id + "> " + listeName.name + "</option>";
+    // async selectCamera(domTarget, nameSelect) {
+    //     let content = "";
+    //     let listeName = "";
+    //     const name = await orinoco.dataManager.getAllProducts();
+    //     for (let i = 0, size = name.length; i < size; i++) {
+    //         listeName = new Article(name[i]);
+    //         if (nameSelect === listeName.name) {
+    //             content += "<option selected value=" + listeName._id + "> " + listeName.name + "</option>";
 
-            }
-            else {
-                content += "<option value=" + listeName._id + "> " + listeName.name + "</option>";
+    //         }
+    //         else {
+    //             content += "<option value=" + listeName._id + "> " + listeName.name + "</option>";
 
-            }
+    //         }
 
 
-        }
+    //     }
 
-        //console.log(content); 
-        document.querySelector(domTarget).innerHTML = content; // Pourquoi je ne peux pas mettre domTarget query selector dans une variable ????
-        // return content;       Pourquoi un simple return content ne fonctionne pas. Comme par exemple la fonction showVariants. ????????
+    //     //console.log(content); 
+    //     document.querySelector(domTarget).innerHTML = content; // Pourquoi je ne peux pas mettre domTarget query selector dans une variable ????
+    //     // return content;       Pourquoi un simple return content ne fonctionne pas. Comme par exemple la fonction showVariants. ????????
 
-        document.querySelector(domTarget).addEventListener('change', (event) => {
-            orinoco.pageManager.changePage("produit_" + event.target.value);
-        });
+    //     document.querySelector(domTarget).addEventListener('change', (event) => {
+    //         orinoco.pageManager.changePage("produit_" + event.target.value);
+    //     });
 
-    }
+    // }
 
 
 

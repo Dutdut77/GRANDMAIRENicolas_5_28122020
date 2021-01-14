@@ -12,10 +12,11 @@ class Cart {
     render() {
 
         if (this.content.length > 0) {
-            this.domTarget.appendChild(this.DOM);
+            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
             this.DOM.innerText = this.content.length;
+            return;
         }
-
+        if (this.domTarget.hasChildNodes())  this.domTarget.removeChild(this.DOM);
     }
 
     add(productId) {
@@ -32,14 +33,14 @@ class Cart {
         
         orinoco.dataManager.saveCart(this.content);
         this.render();
-        orinoco.pageManager.changePage('panier');
+        orinoco.pageManager.showPage('panier');
     }
 
     plus(productId) {
         this.content.push(productId);
         this.render();
         orinoco.dataManager.saveCart(this.content);
-        orinoco.pageManager.changePage('panier');
+        orinoco.pageManager.showPage('panier');
     }
     moins(productId) {
 
