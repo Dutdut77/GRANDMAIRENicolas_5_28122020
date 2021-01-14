@@ -22,7 +22,8 @@ class PageManager {
   }
 
   changePage(newPage, title) {
-    history.pushState({}, title, "?" + newPage);
+        history.pushState({}, title, "?" + newPage);
     this.showPage(newPage);
+    
   }
 }

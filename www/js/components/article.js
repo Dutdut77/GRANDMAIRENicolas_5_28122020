@@ -73,8 +73,6 @@ class Article {
 
     affichePanier(listePanier) {
 
-   
-
         return `
         <div class="card_panier">
             <div class="card_panier_titre">
@@ -95,7 +93,7 @@ class Article {
     }
 
     showTotal(data) {
-      
+
         let price = '';
         let totalPrice = '';
         for (let i = 0, size = data.length; i < size; i++) {
@@ -105,13 +103,22 @@ class Article {
         return totalPrice + "€";
     }
 
-    showPanier(data) {        
+    showPanier(data) {
+
+
+
+
         let content = "";
         let contentPanier = "";
+        let contentId = [];
         for (let i = 0, size = data.length; i < size; i++) {
+            if (contentId.includes(data[i]._id)) {
+                content ="";
+            }
+            else {
 
-            console.log(data);
-            content  = `<div class="show_panier">                
+         
+            content = `<div class="show_panier">                
                             <div class="card_panier_img">
                                     <div class="panier_img" style="background-image: url('${data[i].imageUrl}');"></div>
                             </div>              
@@ -124,7 +131,7 @@ class Article {
                                     <div class="quantite_titre">Quantité :</div>
                                     <div class="quantite_box"> 
                                         <div class="quantite_box_moins" onclick="orinoco.cart.moins('${data[i]._id}')"></div>
-                                        <div class="quantite_box_nombre">1</div>
+                                        <div class="quantite_box_nombre">${this.countProduit(data[i]._id, data)}</div>
                                          <div class="quantite_box_plus" onclick="orinoco.cart.plus('${data[i]._id}')"></div>
                                     </div>    
                                 </div>   
@@ -136,17 +143,18 @@ class Article {
                             </div> 
 
                         </div>
-            `;
-       contentPanier += content;
-
+            `; 
+              }
+            contentPanier += content;
+            contentId.push(data[i]._id);
         }
-       
-         return contentPanier;
+
+        return contentPanier;
     }
-
-
-
-
+    countProduit(produitId, data) {
+        let countProduit = data.filter(x => x._id === produitId).length;
+        return countProduit;
+    }
 
 
     showVariants(variants) {
@@ -157,60 +165,6 @@ class Article {
 
         return content;
     }
-
-    // async selectCamera(domTarget, nameSelect) {
-    //     let content = "";
-    //     let listeName = "";
-    //     const name = await orinoco.dataManager.getAllProducts();
-    //     for (let i = 0, size = name.length; i < size; i++) {
-    //         listeName = new Article(name[i]);
-    //         if (nameSelect === listeName.name) {
-    //             content += "<option selected value=" + listeName._id + "> " + listeName.name + "</option>";
-
-    //         }
-    //         else {
-    //             content += "<option value=" + listeName._id + "> " + listeName.name + "</option>";
-
-    //         }
-
-
-    //     }
-
-    //     //console.log(content); 
-    //     document.querySelector(domTarget).innerHTML = content; // Pourquoi je ne peux pas mettre domTarget query selector dans une variable ????
-    //     // return content;       Pourquoi un simple return content ne fonctionne pas. Comme par exemple la fonction showVariants. ????????
-
-    //     document.querySelector(domTarget).addEventListener('change', (event) => {
-    //         orinoco.pageManager.changePage("produit_" + event.target.value);
-    //     });
-
-    // }
-
-
-
-
-
-
-    /**
-        aaselectCamera() {
-            let selectName = "";
-                   fetch(orinoco.dataManager.src)
-                .then((res) => res.json())
-                .then((data) => {
-                    for (let i = 0, size = data.length; i < size; i++) {
-                        selectName += "<option value=" + data[i].name + "> " + data[i].name + "</option>";
-    
-                    }
-                    
-                    //return selectName;
-    
-                });
-    
-            console.log(selectName);
-    
-    
-        }
-     */
 
 
     changePage() {

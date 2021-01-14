@@ -16,7 +16,7 @@ class Cart {
             this.DOM.innerText = this.content.length;
             return;
         }
-        if (this.domTarget.hasChildNodes())  this.domTarget.removeChild(this.DOM);
+        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
     }
 
     add(productId) {
@@ -30,7 +30,7 @@ class Cart {
         if (index > -1) {
             this.content.splice(index, 1);
         }
-        
+
         orinoco.dataManager.saveCart(this.content);
         this.render();
         orinoco.pageManager.showPage('panier');
@@ -43,7 +43,16 @@ class Cart {
         orinoco.pageManager.showPage('panier');
     }
     moins(productId) {
+        let countProduit = this.content.filter(x => x === productId).length;
 
+        let index = this.content.indexOf(productId);
+        if (index > -1 && countProduit > 1) {
+            this.content.splice(index, 1);
+        }
+
+        orinoco.dataManager.saveCart(this.content);
+        this.render();
+        orinoco.pageManager.showPage('panier');
     }
 
 }
