@@ -22,6 +22,22 @@ class DataManager {
   }
 
 
+  async postPanier(user) {
+    const contact = JSON.stringify(user);
+    const option = {
+      method: 'POST',
+      body: contact
+    }
+
+   
+    console.log(user);
+    const data = await fetch("http://localhost:3000/api/cameras/order", option);
+    this.retour = await data.json();
+    console.log(this.retour);
+  }
+
+
+
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
       if (this.products[i]._id === productId) return this.products[i];
