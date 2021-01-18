@@ -70,124 +70,33 @@ class Article {
              `;
     }
 
+    showPanier(){
+     return ` <div class="show_panier">                
+      <div class="card_panier_img">
+              <div class="panier_img" style="background-image: url('${this.imageUrl}');"></div>
+      </div>              
+          
+       <div class="panier_content">
+          <div class="panier_content_titre">
+              <h4>${this.name}</h4>
+          </div>
+          <div class="panier_content_quantite">
+              <div class="quantite_titre">Quantité :</div>
+              <div class="quantite_box"> 
+                  <div class="quantite_box_moins" onclick="orinoco.pageManager.page.moins('${this._id}')"></div>
+                  <div class="quantite_box_nombre">${this.qte}</div>
+                   <div class="quantite_box_plus" onclick="orinoco.pageManager.page.plus('${this._id}')"></div>
+              </div>    
+          </div>   
+      </div>
+  
+      <div class="panier_price">
+          <div class="corbeille" onclick="orinoco.pageManager.page.removeProduct('${this._id}')"></div>
+          <h4>${this.price}€</h4> 
+      </div> 
 
-    affichePanier(listePanier) {
-
-        return `
-        <div class="card_panier">
-            <div class="card_panier_titre">
-                <h1> MON PANIER : </h1>
-            </div>
-        
-            ${this.showPanier(listePanier)}
-            <div class="card_panier_total">
-                <h2> TOTAL :  </h2>
-                <div class="total_price">
-                    ${this.showTotal(listePanier)}
-                </div>
-            </div>
-            <div class="contact">
-                <h2> Vos coordonnées :  </h2>
-
-                <form autocomplete="off">
-                    <div class="form__group">
-                        <label for="nom">Nom : </label>
-                        <input type="text" name="nom" autocomplete="off">
-                    </div>
-                    <div class="form__group">
-                        <label for="prenom">Prénom: </label>
-                        <input type="text" name="prenom" autocomplete="off">
-                    </div>
-                    <div class="form__group">
-                        <label for="adresse">Adresse : </label>
-                        <input type="text" name="adresse" autocomplete="off">
-                    </div>
-                    <div class="form__group">
-                        <label for="ville">Ville :</label>
-                        <input type="text" name="ville" autocomplete="off">
-                    </div>
-                    <div class="form__group">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" autocomplete="off">
-                    </div>
-
-                    <div class="form-btn">
-                        <div class="valid-btn" onclick="">Valider votre commande</div>
-                    </div>
-
-                </form>
-
-              
-
-            </div>
-
-
-        </div>
-                    `;
-    }
-
-    showTotal(data) {
-
-        let price = '';
-        let totalPrice = '';
-        for (let i = 0, size = data.length; i < size; i++) {
-            price = data[i].price;
-            totalPrice = Number(totalPrice) + Number(price);
-        }
-        return totalPrice + "€";
-    }
-
-    showPanier(data) {
-
-
-
-
-        let content = "";
-        let contentPanier = "";
-        let contentId = [];
-        for (let i = 0, size = data.length; i < size; i++) {
-            if (contentId.includes(data[i]._id)) {
-                content ="";
-            }
-            else {
-
-         
-            content = ` <div class="show_panier">                
-                            <div class="card_panier_img">
-                                    <div class="panier_img" style="background-image: url('${data[i].imageUrl}');"></div>
-                            </div>              
-                                
-                             <div class="panier_content">
-                                <div class="panier_content_titre">
-                                    <h4>${data[i].name}</h4>
-                                </div>
-                                <div class="panier_content_quantite">
-                                    <div class="quantite_titre">Quantité :</div>
-                                    <div class="quantite_box"> 
-                                        <div class="quantite_box_moins" onclick="orinoco.cart.moins('${data[i]._id}')"></div>
-                                        <div class="quantite_box_nombre">${this.countProduit(data[i]._id, data)}</div>
-                                         <div class="quantite_box_plus" onclick="orinoco.cart.plus('${data[i]._id}')"></div>
-                                    </div>    
-                                </div>   
-                            </div>
-                        
-                            <div class="panier_price">
-                                <div class="corbeille" onclick="orinoco.cart.remove('${data[i]._id}')"></div>
-                                <h4>${data[i].price}€</h4> 
-                            </div> 
-
-                        </div>
-            `; 
-              }
-            contentPanier += content;
-            contentId.push(data[i]._id);
-        }
-
-        return contentPanier;
-    }
-    countProduit(produitId, data) {
-        let countProduit = data.filter(x => x._id === produitId).length;
-        return countProduit;
+  </div>
+`; 
     }
 
 

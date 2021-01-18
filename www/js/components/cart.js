@@ -57,4 +57,9 @@ class Cart {
         orinoco.pageManager.showPage('panier');
     }
 
+    updateFromPagePanier(newCart){
+      this.content = newCart;
+      this.render();
+    }
+
 }
