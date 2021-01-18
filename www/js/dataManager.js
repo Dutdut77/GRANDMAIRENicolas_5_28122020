@@ -38,8 +38,4 @@ class DataManager {
     if (content === null) return [];
     return JSON.parse(content);
   }
-
-
-
-
 }
