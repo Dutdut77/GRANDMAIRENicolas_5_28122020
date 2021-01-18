@@ -86,6 +86,40 @@ class Article {
                     ${this.showTotal(listePanier)}
                 </div>
             </div>
+            <div class="contact">
+                <h2> Vos coordonnées :  </h2>
+
+                <form autocomplete="off">
+                    <div class="form__group">
+                        <label for="nom">Nom : </label>
+                        <input type="text" name="nom" autocomplete="off">
+                    </div>
+                    <div class="form__group">
+                        <label for="prenom">Prénom: </label>
+                        <input type="text" name="prenom" autocomplete="off">
+                    </div>
+                    <div class="form__group">
+                        <label for="adresse">Adresse : </label>
+                        <input type="text" name="adresse" autocomplete="off">
+                    </div>
+                    <div class="form__group">
+                        <label for="ville">Ville :</label>
+                        <input type="text" name="ville" autocomplete="off">
+                    </div>
+                    <div class="form__group">
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" autocomplete="off">
+                    </div>
+
+                    <div class="form-btn">
+                        <div class="valid-btn" onclick="">Valider votre commande</div>
+                    </div>
+
+                </form>
+
+              
+
+            </div>
 
 
         </div>
@@ -118,7 +152,7 @@ class Article {
             else {
 
          
-            content = `<div class="show_panier">                
+            content = ` <div class="show_panier">                
                             <div class="card_panier_img">
                                     <div class="panier_img" style="background-image: url('${data[i].imageUrl}');"></div>
                             </div>              

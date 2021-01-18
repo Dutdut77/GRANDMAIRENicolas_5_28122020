@@ -17,7 +17,6 @@ body {
   flex-direction: column;
   width: 100%;
   background: #f9f9fc;
-
 }
 header {
   display: flex;
@@ -79,7 +78,6 @@ main {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 .card {
@@ -340,8 +338,7 @@ article {
   flex-direction: column;
   align-items: flex-end;
   padding: 5px;
-
-  }
+}
 .quantite_box_plus {
   cursor: pointer;
   font-size: 10px;
@@ -361,7 +358,6 @@ article {
   padding-top: 15px;
   margin-bottom: 15px;
   border-top: 2px solid rgb(201, 201, 201);
-
 }
 
 .corbeille {
@@ -382,7 +378,44 @@ article {
 }
 
 footer {
-  
   margin: auto;
+}
+.contact {
+  width: 100%;
+}
 
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  margin-top : 15px;
+  
+}
+
+.form__group input {
+  border: 1px solid rgb(83, 83, 83);
+  font-size: 1rem;
+ padding: 5px;
+  outline: none;
+
+  transition: background-color 500ms;
+}
+.form__group input:focus {
+  border: 1px solid rgb(118, 0, 148);
+}
+.form__group input:not(:focus):invalid {
+  background-color: red;
+  border: 1px solid red;
+  color: black;
+}
+
+.form-btn {
+  padding: 20px;
+}
+.valid-btn {
+  background: #f3e9f1;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
 }

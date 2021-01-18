@@ -26,11 +26,13 @@ class Cart {
     }
 
     remove(productId) {
-        let index = this.content.indexOf(productId);
-        if (index > -1) {
-            this.content.splice(index, 1);
+        let countProduit = this.content.filter(x => x === productId).length;
+        for (let i = 0, size = countProduit; i < size; i++) {
+            let index = this.content.indexOf(productId);
+            if (index > -1) {
+                this.content.splice(index, 1);
+            }
         }
-
         orinoco.dataManager.saveCart(this.content);
         this.render();
         orinoco.pageManager.showPage('panier');
