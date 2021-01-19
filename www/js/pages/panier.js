@@ -105,13 +105,19 @@ class Panier {
                     </div>
 
                     <div class="form-btn">
-                        <div class="valid-btn" onclick="orinoco.pageManager.page.sendForm(event)">Valider votre commande</div>
+                        <div class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)">Valider votre commande</div>
                     </div>
 
                
 
             </div>
         </div>
+        
+        <div id="myModal" class="modal">
+        </div>
+   
+
+
                     `;
     }
 
@@ -150,7 +156,7 @@ class Panier {
      *
      * @return  {[type]}         [return description]
      */
-    sendForm(e) {
+    async sendForm(e) {
         e.stopPropagation();
         e.preventDefault();
         const nom = document.getElementById("nom").value;
@@ -161,7 +167,7 @@ class Panier {
         const product = [];
         for (const [key, value] of Object.entries(this.products)) {
             for (let i = value.qte; i > 0; i--) {
-                product.push(value);
+                product.push(value._id);
             }
         }
 
@@ -177,7 +183,85 @@ class Panier {
             "products": product
         }
 
-        orinoco.dataManager.postPanier(contact);
+       const result = await orinoco.dataManager.postPanier(contact);
+     this.afficheModal(result);  
+        
+       }
 
+
+   async  afficheModal(data) {  
+      
+const content = `
+
+<!-- Modal content -->
+<div class="modal-content">
+  <div class="modal-header">
+    <span class="close">&times;</span>
+    <h2>N° ${data.orderId}</h2>
+  </div>
+  <div class="modal-body">
+    <p>Nom : ${data.contact.lastName}</p>
+    <p>Prénom : ${data.contact.firstName} </p>
+  </div>
+  <div class="modal-footer">
+    <h3>Modal Footer</h3>
+  </div>
+</div>
+
+`;
+const  domTarget =  document.querySelector(".modal");
+domTarget.innerHTML = content;
+this.optionModal();
+
+  }
+
+  optionModal() {
+
+    let modal = document.getElementById("myModal");
+
+    
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+
+      modal.style.display = "block";
+   
+    
+    // When the user clicks on <span> (x), close the modal
+     span.onclick = function() {
+      modal.style.display = "none";
     }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+  }
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

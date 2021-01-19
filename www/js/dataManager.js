@@ -26,14 +26,17 @@ class DataManager {
     const contact = JSON.stringify(user);
     const option = {
       method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: contact
     }
 
-   
-    console.log(user);
     const data = await fetch("http://localhost:3000/api/cameras/order", option);
-    this.retour = await data.json();
-    console.log(this.retour);
+    return await data.json();
+
+  
   }
 
 
