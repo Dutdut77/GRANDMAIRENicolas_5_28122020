@@ -11,6 +11,7 @@ h2 {
 }
 h3 {
   font-size: 16px;
+  font-weight: bold;
 }
 body {
   display: flex;
@@ -430,9 +431,8 @@ footer {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: auto; /* Enable scroll if needed */ 
+  background-color: rgba(100,100,100,0.7); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -440,52 +440,114 @@ footer {
   position: relative;
   background-color: #fefefe;
   margin: auto;
+
   padding: 0;
-  border: 1px solid #888;
+  border: 2px solid #8f8a9b;
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
-}
+
 
 @keyframes animatetop {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }
 
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
+
+.modal-header {
+  padding: 10px 10px 0 10px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+}
+.modal-header  H2{
+  padding: 2px 16px;
+  font-size: 1.6rem;
+  color:  rgb(201, 137, 137);
+}
+.modal-header p  {
+  padding: 5px 0   10px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.modal-body {
+  padding: 0px 10px;
 }
-
-.modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
-.modal-body {padding: 2px 16px;}
 
 .modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+  padding: 10px;
+  background-color: #fff;
+  color:  #333;
+}
+.modal-btn {
+  padding: 10px;
+  background-color: rgb(201, 137, 137);
+  color:  #FFF;
+  text-align: center;
+ text-transform: uppercase;
+}
+.modal-section {
+  padding : 15px 0 15px 0;
+
+}
+.modal-section p {
+   font-size: 0.9rem;
+   
+}
+.modal-section-titre {
+  font-weight: bold;
+  text-decoration: underline;
+  font-style: italic;
+  padding-bottom: 5px;
+  font-size: 0.9rem;
+}
+.modal-section hr {
+
+margin-top : 5px;
+width: 20%;
+margin-left: auto;
+
+  }
+.recap {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.recap-titre {
+  
+  font-size: 0.9rem;
+}
+.recap-qte {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.recap-price{
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.modal-total {
+  padding-top: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+.modal-facture {
+  padding: 15px 0 15px 0;
+text-align: center;
+  font-size: 0.9rem;
+}
+.mail {
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-style: italic;
+
 }

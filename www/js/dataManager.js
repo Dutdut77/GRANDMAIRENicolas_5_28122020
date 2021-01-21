@@ -57,4 +57,11 @@ class DataManager {
     if (content === null) return [];
     return JSON.parse(content);
   }
+  deletePanier(){
+  
+    
+    localStorage.clear(Cart);
+
+    orinoco.pageManager.changePage('');
+}
 }
