@@ -36,10 +36,8 @@ class DataManager {
     const data = await fetch("http://localhost:3000/api/cameras/order", option);
     return await data.json();
 
-  
+
   }
-
-
 
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
@@ -57,11 +55,10 @@ class DataManager {
     if (content === null) return [];
     return JSON.parse(content);
   }
-  deletePanier(){
-  
-    
+  deletePanier() {
     localStorage.clear(Cart);
-
+    orinoco.cart.content = [];
+    orinoco.cart.render();
     orinoco.pageManager.changePage('');
-}
+  }
 }

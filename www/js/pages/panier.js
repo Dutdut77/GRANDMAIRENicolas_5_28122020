@@ -266,12 +266,6 @@ class Panier {
 
     }
 
-
-    deletePanier(){
-
-        localStorage.clear(Cart);
-        orinoco.pageManager.changePage('');
-    }
     
 
 

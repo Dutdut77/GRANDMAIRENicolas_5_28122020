@@ -11,7 +11,8 @@ class PageManager {
   }
 
   showPage(nom_url) {
-   // orinoco.components = {};
+   //orinoco.components = {};
+  
 
     if (nom_url === "")                             return this.page = new Home(this.domTarget);
     if (nom_url === "panier")                       return this.page = new Panier(this.domTarget);
