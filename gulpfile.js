@@ -1,20 +1,21 @@
-const browser  = require("browser-sync");
+const browser = require("browser-sync");
 const cleanCSS = require("gulp-clean-css");
-const gulp     = require("gulp");
-const sass     = require("gulp-sass");
-const rename = require ("gulp-rename");
+const gulp = require("gulp");
+const sass = require("gulp-sass");
+const rename = require("gulp-rename");
 const fileinclude = require("gulp-file-include");
+const concat = require("gulp-concat");
+const uglify = require("gulp-uglify-es");
 
 
-function makeCss(){
+function makeCss() {
   return gulp.src("./src/scss/style.scss")
     .pipe(sass())
     .pipe(gulp.dest("./www/css/"));
 }
 
 
-
-function minCss(){
+function minCss() {
   return gulp.src("./www/css/style.css")
     .pipe(cleanCSS())
     .pipe(rename("style.min.css"))
@@ -22,20 +23,38 @@ function minCss(){
 }
 
 
-function include(){
+function makeJS() {
+  return gulp.src(["./src/components/**/*.js", "./src/pages/**/*.js", "./src/managers/**/*.js", "./src/main.js"])
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest("./www/js"));
+
+}
+
+
+function minJS() {
+  return gulp.src('./www/js/script.js')
+    .pipe(rename("script.min.js"))
+    .pipe(uglify(/* options */))
+    .pipe(gulp.dest("./www/js"))
+
+}
+
+
+
+function include() {
   return gulp.src("./src/*.html")
     .pipe(fileinclude({
-      prefix : "@@",
+      prefix: "@@",
       basepath: "@file"
     }))
     .pipe(gulp.dest("./www/"));
 }
 
 
-function watch(){
+function watch() {
   browser.init({
     server: {
-      baseDir : "./www"
+      baseDir: "./www"
     }
   });
   gulp.watch("./src/scss/**/*.scss", seqdev);
@@ -50,4 +69,6 @@ exports.makeCss = makeCss;
 exports.minCss = minCss;
 exports.seqdev = seqdev;
 exports.include = include;
-exports.watch = watch; 
+exports.watch = watch;
+exports.makeJS = makeJS;
+exports.minJS = minJS; 
