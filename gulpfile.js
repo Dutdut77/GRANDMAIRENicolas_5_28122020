@@ -3,10 +3,8 @@ const cleanCSS = require("gulp-clean-css");
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 const rename = require("gulp-rename");
-const fileinclude = require("gulp-file-include");
 const concat = require("gulp-concat");
-const uglify = require("gulp-uglify-es");
-
+const terser = require('gulp-terser');
 
 function makeCss() {
   return gulp.src("./src/scss/style.scss")
@@ -34,21 +32,11 @@ function makeJS() {
 function minJS() {
   return gulp.src('./www/js/script.js')
     .pipe(rename("script.min.js"))
-    .pipe(uglify(/* options */))
+    .pipe(terser())
     .pipe(gulp.dest("./www/js"))
 
 }
 
-
-
-function include() {
-  return gulp.src("./src/*.html")
-    .pipe(fileinclude({
-      prefix: "@@",
-      basepath: "@file"
-    }))
-    .pipe(gulp.dest("./www/"));
-}
 
 
 function watch() {
@@ -57,18 +45,18 @@ function watch() {
       baseDir: "./www"
     }
   });
-  gulp.watch("./src/scss/**/*.scss", seqdev);
-  gulp.watch("./src/*.html", include);
-  gulp.watch("./src/partial/*.html", include);
-  gulp.watch("./www/").on("change", browser.reload);
+  gulp.watch("./src/**/*.scss", seqcss);
+  gulp.watch("./src/**/*.js", seqjs);
+  gulp.watch("./www/js/").on("change", browser.reload);
 }
 
 
-const seqdev = gulp.series(makeCss, minCss);
+const seqcss = gulp.series(makeCss, minCss);
+const seqjs = gulp.series(makeJS, minJS);
 exports.makeCss = makeCss;
 exports.minCss = minCss;
-exports.seqdev = seqdev;
-exports.include = include;
-exports.watch = watch;
+exports.seqcss = seqcss;
 exports.makeJS = makeJS;
 exports.minJS = minJS; 
+exports.seqjs = seqjs;
+exports.watch = watch;

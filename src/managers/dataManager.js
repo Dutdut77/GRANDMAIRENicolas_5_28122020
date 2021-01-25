@@ -13,14 +13,12 @@ class DataManager {
     return this.products;
 
   }
-
   async getProduct(productId) {
     if (this.products !== null) return this.findInProducts(productId);
     const data = await fetch(this.src + "/" + productId);
     return await data.json();
 
   }
-
 
   async postPanier(user) {
     const contact = JSON.stringify(user);
