@@ -92,7 +92,7 @@ class Article {
   
       <div class="panier_price">
           <div class="corbeille" onclick="orinoco.pageManager.page.removeProduct('${this._id}')"></div>
-          <h4>${this.price}€</h4> 
+          <h4>${this.price * this.qte}€</h4> 
       </div> 
 
   </div>

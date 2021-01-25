@@ -149,6 +149,7 @@ class Panier {
         this.updateCount();
     }
 
+    
     /**
      * [sendForm description]
      *
