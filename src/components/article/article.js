@@ -29,7 +29,7 @@ class Article {
                 </div>
             </div>
             <div class="list_bouton">
-                <div class="btn" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
+                <div class="btn-grad" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
             </div>
         </div>
              `;
@@ -111,7 +111,7 @@ class Article {
 
 
     changePage() {
-        orinoco.pageManager.changePage("produit_" + this._id, "Page produit " + this.name)
+        orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }
 
 

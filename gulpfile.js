@@ -7,7 +7,7 @@ const concat = require("gulp-concat");
 const terser = require('gulp-terser');
 
 function makeCss() {
-  return gulp.src("./src/scss/style.scss")
+  return gulp.src("./src/style.scss")
     .pipe(sass())
     .pipe(gulp.dest("./www/css/"));
 }
@@ -47,6 +47,7 @@ function watch() {
   });
   gulp.watch("./src/**/*.scss", seqcss);
   gulp.watch("./src/**/*.js", seqjs);
+  gulp.watch("./www/css/").on("change", browser.reload);
   gulp.watch("./www/js/").on("change", browser.reload);
 }
 

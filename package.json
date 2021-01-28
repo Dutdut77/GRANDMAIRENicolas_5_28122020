@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "node ./node_modules/gulp/bin/gulp.js watch",
-    "sequenceCss": "node ./node_modules/gulp/bin/gulp.js seqdev",
+    "sequenceCss": "node ./node_modules/gulp/bin/gulp.js seqcss",
     "MakeJS": "node ./node_modules/gulp/bin/gulp.js makeJS",
     "MinJS": "node ./node_modules/gulp/bin/gulp.js minJS",
     "includeHtml": "node ./node_modules/gulp/bin/gulp.js include"

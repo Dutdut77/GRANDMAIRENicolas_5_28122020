@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: white;
+    width: 100%;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    width: 60px;
+  }
+  .menu::before {
+    padding: 0 15px 0 15px;
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    content: "\f0c9";
+    font-size: 1.6em;
+    cursor: pointer;
+  }
+  .logo {
+    height: 100%;
+  }
+  
+.shopping_cart {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    width: 60px;
+  }
+  .shopping_cart::before {
+    padding: 0 15px 0 15px;
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    content: "\f07a";
+    font-size: 1.6em;
+    cursor: pointer;
+  }
