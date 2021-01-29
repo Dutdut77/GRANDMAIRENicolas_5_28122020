@@ -37,7 +37,7 @@ class Panier {
         for (const value of Object.values(this.products)) {
             produit = new Article(value);
             html += produit.showPanier();
-            total += value.qte * value.price;
+            total += value.qte * value.price / 100;
         }
         domTarget.innerHTML = this.templatePanier(html, total);
     }
@@ -76,7 +76,7 @@ class Panier {
             <div class="card_panier_total">
                 <h2> TOTAL :  </h2>
                 <div class="total_price">
-                    ${total}
+                    ${total} €
                 </div>
             </div>
             <div class="contact">
@@ -203,7 +203,7 @@ class Panier {
             recap += `<div class="recap">
             <div class="recap-titre">${value.name}</div>
             <div class="recap-qte">Quantité : ${value.qte}</div>
-            <div class="recap-price">${value.price * value.qte} €</div>                       
+            <div class="recap-price">${(value.price) / 100 * value.qte} €</div>                       
             </div>`;
         }
 

@@ -7,21 +7,6 @@ header {
   background-color: white;
   width: 100%; }
 
-.menu {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  cursor: pointer;
-  width: 60px; }
-
-.menu::before {
-  padding: 0 15px 0 15px;
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  content: "\f0c9";
-  font-size: 1.6em;
-  cursor: pointer; }
-
 .logo {
   height: 100%; }
 
@@ -40,8 +25,82 @@ header {
   font-size: 1.6em;
   cursor: pointer; }
 
+#menuCheck,
+.menu-icon {
+  width: 0;
+  height: 0;
+  display: none; }
+
+.menu-icon {
+  color: black;
+  position: relative;
+  z-index: 20; }
+
+.menu-list {
+  position: fixed;
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  color: black;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s; }
+
+#menuCheck:checked ~ .menu-list {
+  transform: translate(-100%, -100%); }
+
+.menu-list li {
+  text-transform: uppercase;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  opacity: 1;
+  transition: opacity 1s; }
+
+.menu-list li::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 1px;
+  margin-top: 1px;
+  margin-left: -12%;
+  transition: 0.3s ease;
+  background: black; }
+
+.menu-list li:hover::after {
+  width: 120%; }
+
+#menuCheck:checked ~ .menu-list li {
+  opacity: 0; }
+
+.menu-icon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  font-size: 1.4em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+label .fa-bars,
+#menuCheck:checked ~ label .fa-times {
+  display: none;
+  font-size: 1.6rem; }
+
+label .fa-times,
+#menuCheck:checked ~ label .fa-bars {
+  display: block;
+  font-size: 1.6rem; }
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font: 1rem "Didot", sans-serif; }
@@ -60,9 +119,11 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); }
 
 main {
+  margin-bottom: auto;
   width: 100%;
   display: flex;
   flex-wrap: wrap; }

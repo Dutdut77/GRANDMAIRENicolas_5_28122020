@@ -20,8 +20,20 @@
 
     
         <header>
-          
-            <div class="menu"></div>
+          <section class="menu">
+                  <input type="checkbox" id="menuCheck">
+                  <label for="menuCheck" class="menu-icon">
+                      <i class="fas fa-bars"></i>
+                      <i class="fas fa-times"></i>
+                  </label>
+
+                  <ul class="menu-list">
+                      <li>Home</li>
+                      <li>Cameras</li>
+                      <li>About</li>
+                      <li>Contact</li>
+                  </ul>
+         </section>
             <img class="logo"  onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')" src="/img/logo/orinoco.png" alt="Orinoco vente d'appareil photo">
             <div class="shopping_cart" onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')"></div>
         </header>

@@ -47,7 +47,7 @@ class Article {
                     <h3>${this.name}</h3>
                 </div>
                 <div class="produit_prix">
-                     ${this.price} € 
+                     ${this.price / 100} € 
                 </div>  
             </div>
  
@@ -92,7 +92,7 @@ class Article {
   
       <div class="panier_price">
           <div class="corbeille" onclick="orinoco.pageManager.page.removeProduct('${this._id}')"></div>
-          <h4>${this.price * this.qte}€</h4> 
+          <h4>${this.price / 100 * this.qte}€</h4> 
       </div> 
 
   </div>
