@@ -19,17 +19,17 @@ class Article {
     afficheResume() {
         return `
         <div class="card">
-            <div class="list_image" style="background-image: url('${this.imageUrl}');"></div>
-            <div class="list_content">
-                <div class="content_titre">
+            <div class="card__list-image" style="background-image: url('${this.imageUrl}');"></div>
+            <div class="card__list-content">
+                <div class="card__content-titre">
                     <h3>${this.name}</h3>
                 </div>
-                <div class="content_desc">
+                <div class="card__content-desc">
                 ${this.description}  
                 </div>
             </div>
-            <div class="list_bouton">
-                <div class="btn-grad" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
+            <div class="card__list_bouton">
+                <div class="card__btn btn-grad-color" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
             </div>
         </div>
              `;
@@ -38,20 +38,20 @@ class Article {
     afficheDetails() {
 
         return `
-        <div class="card-produit">
+        <div class="produit">
 
-            <div class="produit_image" style="background-image: url('${this.imageUrl}');"></div>
+            <div class="produit-image" style="background-image: url('${this.imageUrl}');"></div>
             
-            <div class="produit_content">
-                <div class="produit_titre">
+            <div class="produit-content">
+                <div class="produit-titre">
                     <h3>${this.name}</h3>
                 </div>
-                <div class="produit_prix">
+                <div class="produit-prix">
                      ${this.price / 100} € 
                 </div>  
             </div>
  
-            <div class="produit_desc">
+            <div class="produit-desc">
                 <article>
                 ${this.description}
                 </article>             
@@ -62,8 +62,8 @@ class Article {
                 ${this.showVariants(this.lenses)}      
             </select>
             
-            <div class="produit_bouton">
-                <div class="produit_btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
+            <div class="produit-bouton">
+                <div class="produit-btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
             </div>
 
         </div>

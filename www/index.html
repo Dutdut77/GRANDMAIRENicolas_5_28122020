@@ -21,16 +21,16 @@
     
         <header>
           <section class="menu">
-                  <input type="checkbox" id="menuCheck">
+                  <input type="checkbox" id="menuCheck" checked="none">
                   <label for="menuCheck" class="menu-icon">
                       <i class="fas fa-bars"></i>
                       <i class="fas fa-times"></i>
                   </label>
 
                   <ul class="menu-list">
-                      <li>Home</li>
-                      <li>Cameras</li>
-                      <li>About</li>
+                      <li onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')">Home</li>
+                      <li onclick="orinoco.pageManager.changePage('produit', 'Orinoco - Vente de caméras en ligne')">Cameras</li>
+                      <li onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')">Panier</li>
                       <li>Contact</li>
                   </ul>
          </section>
@@ -51,12 +51,12 @@
 
         
         <footer class="footer">
-            <div class="footer-left">
-              <p class="about">
+            <div class="footer__left">
+              <p class="footer__left-about">
                 <span> A PROPOS D'ORINOCO</span> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, accusantium id? Dolor in nostrum quae tempora error dolorum earum porro quam, autem assumenda reiciendis asperiores voluptatum, consequuntur delectus pariatur nam.
               </p>
             </div>
-            <div class="footer-center">
+            <div class="footer__center">
               <div>
                 <i class="fa fa-map-marker-alt"></i>
                 <p><span> 14 Route de Paris</span> 75000, PARIS</p>
@@ -74,3 +74,8 @@
 
     </body>
 </html>
+
+
+
+
+

@@ -1,0 +1,11 @@
+$color-primary : #7e8db1;
+$color-secondary: #5f729e;
+$color-tertiary: #7a89aa;
+$color-fond: #F6F6F6;
+$color-footer: #414141;
+
+$color-primary-light : lighten($color-primary, 5);
+$color-secondary-light : lighten($color-secondary, 5);
+
+$font-family : (Shrikhand: Shrikhand, Roboto: Roboto, Robotobold: Robotobold);
+$font-size : (logo: 1.8rem, section-heading: 1.3rem, location: 1rem, ordre: 0.8rem, footer: 1.2rem, nouveau: 0.9rem);
