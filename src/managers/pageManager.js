@@ -22,6 +22,7 @@ class PageManager {
   }
 
   changePage(newPage, title) {
+    document.getElementById("menuCheck").checked="none";
     document.title = title;
     history.pushState({}, title, "?" + newPage);
     this.showPage(newPage);

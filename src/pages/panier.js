@@ -67,22 +67,23 @@ class Panier {
     templatePanier(contenuPanier, total) {
 
         return `
-        <div class="card_panier">
-            <div class="card_panier_titre">
-                <h1> MON PANIER : </h1>
-            </div>
-        
-            ${contenuPanier}
-            <div class="card_panier_total">
-                <h2> TOTAL :  </h2>
-                <div class="total_price">
-                    ${total} €
+        <div class="panier">
+
+            <div class="card_panier">
+                <div class="card_panier_titre">
+                    <h1> MON PANIER : </h1>
+                </div>           
+                     ${contenuPanier}
+                <div class="card_panier_total">
+                    <h2> TOTAL : </h2>
+                    <div class="total_price">
+                        ${total} €
+                    </div>
                 </div>
             </div>
-            <div class="contact">
-                <h2> Vos coordonnées :  </h2>
 
-               
+            <div class="contact">
+                    <h2> Vos coordonnées :</h2>               
                     <div class="form__group">
                         <label for="nom">Nom : </label>
                         <input type="text" name="nom" id="nom">
@@ -106,11 +107,9 @@ class Panier {
 
                     <div class="form-btn">
                         <div class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)">Valider votre commande</div>
-                    </div>
-
-               
-
+                    </div>         
             </div>
+
         </div>
         
         <div id="myModal" class="modal">
@@ -199,7 +198,7 @@ class Panier {
         }
         const validPanier = await this.cartArrayToCartObject(liste);
         for (const value of Object.values(validPanier)) {
-            recapTotal +=value.price * value.qte;
+            recapTotal +=value.price * value.qte /100;
             recap += `<div class="recap">
             <div class="recap-titre">${value.name}</div>
             <div class="recap-qte">Quantité : ${value.qte}</div>

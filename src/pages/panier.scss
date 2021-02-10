@@ -1,116 +1,324 @@
 /*card panier */
-.card_panier {
-    overflow: hidden;
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    margin: 20px;
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-    padding: 10px;
+.panier {
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 60px 20px 20px 20px;
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
+  padding: 10px;
+  @media (min-width: 768px) {
+    max-width: 1200px;
+    margin: 0px 20px 20px 20px;
+    flex-direction: row;
+    justify-content: space-around;
   }
-  .card_panier_titre {
+}
+.card_panier {
+  @media (min-width: 768px) {
+    width: 40%;
+  }
+  &_titre {
+    margin-top: 20px;
     margin-bottom: 10px;
   }
-  .show_panier {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-top: 15px;
-    margin-bottom: 15px;
-    border-top: 2px solid rgb(201, 201, 201);
-  }
-  
-  .card_panier_img {
-    padding: 5px;
-    height: 60px;
-    border: 1px solid rgb(201, 201, 201);
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-  }
-  .panier_img {
-    background-position: center center;
-    background-size: cover;
-    min-width: 60px;
-    height: 60px;
-  }
-  .panier_content {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    height: auto;
-    margin-right: auto;
-  }
-  .panier_content_titre {
-    margin-top: 2px;
-  }
-  .panier_content_quantite {
-    margin-top: auto;
-  }
-  .quantite_titre {
-    font-size: 12px;
-    color: rgb(77, 76, 76);
-  }
-  .quantite_box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    height: 30px;
-    width: 120px;
-    border: 1px solid rgb(201, 201, 201);
-  }
-  .quantite_box_moins {
-    cursor: pointer;
-    font-size: 10px;
-  }
-  
-  .quantite_box_moins::before {
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    content: "\f068";
-    cursor: pointer;
-  }
-  
-  .panier_price {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 5px;
-  }
-  .quantite_box_plus {
-    cursor: pointer;
-    font-size: 10px;
-  }
-  
-  .quantite_box_plus::before {
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    content: "\f067";
-    cursor: pointer;
-  }
-  .card_panier_total {
+  &_total {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    align-items: center;
+    align-items: baseline;
     padding-top: 15px;
     margin-bottom: 15px;
-    border-top: 2px solid rgb(201, 201, 201);
+    border-top: 2px solid $color-grey;
   }
-  
-  .corbeille {
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: auto;
+}
+
+.show_panier {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  border-top: 2px solid $color-grey;
+}
+
+.card_panier_img {
+  padding: 5px;
+  height: 60px;
+  border: 1px solid $color-grey;
+  @include shadow(0.3);
+  @media (min-width: 768px) {
+    height: 80px;
   }
-  
-  .corbeille::before {
-    font-weight: 900;
-    font-family: "Font Awesome 5 Free";
-    content: "\f2ed";
-    cursor: pointer;
+}
+.panier_img {
+  background-position: center center;
+  background-size: cover;
+  min-width: 60px;
+  height: 60px;
+  @media (min-width: 768px) {
+    min-width: 80px;
+    height: 80px;
   }
-  
-  .total_price {
-    padding: 5px;
+}
+.panier_content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  height: auto;
+  margin-right: auto;
+}
+.panier_content_titre {
+  margin-top: 2px;
+}
+.panier_content_quantite {
+  margin-top: auto;
+}
+.quantite_titre {
+  font-size: 12px;
+  color: rgb(77, 76, 76);
+  @media (min-width: 768px) {
+    font-size: 14px;
   }
+}
+.quantite_box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+  width: 120px;
+  border: 1px solid rgb(201, 201, 201);
+}
+.quantite_box_moins {
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.quantite_box_moins::before {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f068";
+  cursor: pointer;
+}
+
+.panier_price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 5px;
+}
+.quantite_box_plus {
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.quantite_box_plus::before {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f067";
+  cursor: pointer;
+}
+
+.corbeille {
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: auto;
+}
+
+.corbeille::before {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f2ed";
+  cursor: pointer;
+}
+
+.total_price {
+  padding: 5px;
+  font-weight: bold;
+}
+
+.contact {
+  width: auto;
+  margin-top: 20px;
+  & h2 {
+    text-transform: uppercase;
+  }
+  @media (min-width: 768px) {
+    width: 40%;
+  }
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.form__group input {
+  border: 1px solid rgb(83, 83, 83);
+  font-size: 1rem;
+  padding: 5px;
+  outline: none;
+
+  transition: background-color 500ms;
+}
+.form__group input:focus {
+  border: 1px solid rgb(118, 0, 148);
+}
+.form__group input:not(:focus):invalid {
+  background-color: red;
+  border: 1px solid red;
+  color: black;
+}
+
+.form-btn {
+  padding: 30px 20px 20px 20px;
+}
+
+.valid-btn {
+  @include btn-grad;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.valid-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 20px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(100, 100, 100, 0.7); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+
+  padding: 0;
+  border: 2px solid $color-secondary;
+  width: 60%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.modal-header {
+  padding: 10px 10px 0 10px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+}
+.modal-header h2 {
+  padding: 2px 16px;
+  font-size: 1.6rem;
+  color: $color-secondary;
+}
+.modal-header p {
+  padding: 5px 0 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 0px 10px;
+}
+
+.modal-footer {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-btn {
+  @include btn-grad;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  width: 100%;
+  height: 30px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @media (min-width: 768px) {
+    width: 80%;
+    height: 40px;
+  }
+  &:hover {
+    background-position: right center;
+    text-decoration: none;
+  }
+}
+
+.modal-section {
+  padding: 15px 0 15px 0;
+}
+
+.modal-section-titre {
+  font-weight: bold;
+  text-decoration: underline;
+  font-style: italic;
+  padding-bottom: 5px;
+}
+.modal-section hr {
+  margin-top: 5px;
+  width: 20%;
+  margin-left: auto;
+}
+.recap {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recap-qte {
+  font-style: italic;
+}
+.recap-price {
+  font-weight: bold;
+}
+.modal-total {
+  padding-top: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  font-weight: bold;
+
+  font-style: italic;
+}
+.modal-facture {
+  padding: 15px 0 15px 0;
+  text-align: center;
+}
+.mail {
+  text-decoration: underline;
+  font-style: italic;
+}
