@@ -1,51 +1,47 @@
-
-
 .footer {
-  
-    display:flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-around;
-    align-items: flex-start;
-    background-color: $color-footer;
-    clip-path: polygon(0 11%, 100% 0, 100% 100%, 0% 100%);
-    font-family: sans-serif;
-    font-weight: bold;
-        
- 
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: $color-footer;
+  clip-path: polygon(0 11%, 100% 0, 100% 100%, 0% 100%);
+  font-family: sans-serif;
+  font-weight: bold;
+
   &__left {
     text-align: justify;
     width: 80%;
-    margin : 80px 30px 30px 30px;
+    margin: 80px 30px 30px 30px;
   }
-  
+
   &__left-about {
     line-height: 20px;
     color: #ffffff;
     font-weight: normal;
-    margin-top : 10px;
+    margin-top: 10px;
   }
-  
+
   &__left-about span {
     display: block;
-    color:white;
+    color: white;
     font-weight: bold;
     margin-bottom: 20px;
   }
- 
+
   &__center {
     text-align: left;
     width: 80%;
-    margin : 0 30px 30px 30px;
-    @media (min-width: 1024px) { 
-     display:flex;
-     flex-wrap: nowrap;
-     justify-content: space-around;
-    } 
+    margin: 0 30px 30px 30px;
+    @media (min-width: 1024px) {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+    }
   }
- 
+
   &__center i {
-    background-color:  #c2e9fb;
+    background-color: #c2e9fb;
     color: #414141;
     font-size: 17px;
     width: 38px;
@@ -56,32 +52,27 @@
     margin: 10px 0;
     vertical-align: middle;
   }
-  
+
   &__center i.fa-envelope {
     font-size: 17px;
     line-height: 38px;
   }
-  
+
   &__center p {
     display: inline-block;
     color: white;
     vertical-align: middle;
     margin-left: 10px;
   }
-  
+
   &__center p span {
     font-weight: normal;
     font-size: 14px;
     line-height: 2;
   }
-  
+
   &__center p a {
     color: #f3e9f1;
     text-decoration: none;
   }
 }
-  
-  
-  
-  
- 

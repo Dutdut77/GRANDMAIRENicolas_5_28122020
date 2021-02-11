@@ -1,58 +1,51 @@
-
 .camera {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0.6rem;
-    margin: 20px 20px 0 20px;
-    font-size: 16px;
-    font-family: sans-serif;
-    font-weight: 700;
-    color: #444;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-    border-radius: 4px;
-    background-color: #fff;
-    @media (min-width: 768px) {
-      width: 70%;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.6rem;
+  margin: 20px 20px 0 20px;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #444;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
+  border-radius: 4px;
+  background-color: #fff;
+  @media (min-width: 768px) {
+    width: 70%;
   }
-  .camera:hover {
-    border-color: #888;
-  }
-  /* Focus style */
-  .camera:focus {
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-    color: #222;
-    outline: none;
-  }
-  
+}
+.camera:hover {
+  border-color: #888;
+}
 
-  .lenses {
-    width: 100%;
-    padding: 10px;
-    margin: 15px;
-    font-weight: 500;
-    color: #444;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-    border-radius: 4px;
-    background-color: #fff;
-  }
-  .lenses:hover {
-    border-color: #888;
-  }
-  /* Focus style */
-  .lenses:focus {
-    box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
-    color: #222;
-    outline: none;
-  }
+.camera:focus {
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
+  color: #222;
+  outline: none;
+}
 
-
-
-  
-  
+.lenses {
+  width: 100%;
+  padding: 10px;
+  margin: 15px;
+  font-weight: 500;
+  color: #444;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
+  border-radius: 4px;
+  background-color: #fff;
+}
+.lenses:hover {
+  border-color: #888;
+}
+/* Focus style */
+.lenses:focus {
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.3);
+  color: #222;
+  outline: none;
+}

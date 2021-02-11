@@ -1,7 +1,7 @@
 class Home {
 
     /**
-     * insert la page d'accueil 
+     * Insert la page d'accueil 
      *
      * @param   {HTMLElement}  domTarget  [domTarget description]
      *
@@ -13,7 +13,7 @@ class Home {
 
 
     /**
-     * recupère les données et affiche la page home dans le DOM
+     * Récupère les données et affiche la page home dans le DOM
      *  
      * @param   {HTMLElement}  domTarget  [domTarget description]
      * 
@@ -30,3 +30,4 @@ class Home {
         domTarget.innerHTML = content;
     }
 }
+

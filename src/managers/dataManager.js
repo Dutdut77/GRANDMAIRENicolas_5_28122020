@@ -3,16 +3,36 @@ class DataManager {
   products = null;
   src;
 
+
+  /**
+   * [Récupère le lien de l'API]
+   *
+   * @param   {[link]}  src  [Lien de l'API]
+   *
+   */
   constructor(src) {
     this.src = src;
   }
 
+  /**
+   * [Récupère tous les données de toutes les cameras]
+   *
+   * @return  {[JSON]}  [JSON de toutes les cameras]
+   */
   async getAllProducts() {
     const data = await fetch(this.src);
     this.products = await data.json();
     return this.products;
 
   }
+
+  /**
+   * [Récupère toutes les données d'une seule caméra]
+   *
+   * @param   {[id]}  productId  [ID d'une caméra]
+   *
+   * @return  {[JSON]}             [JSON des données d'une caméra]
+   */
   async getProduct(productId) {
     if (this.products !== null) return this.findInProducts(productId);
     const data = await fetch(this.src + "/" + productId);
@@ -20,6 +40,13 @@ class DataManager {
 
   }
 
+  /**
+   * [Envoi la validation du panier à l'API]
+   *
+   * @param   {[Array]}  user  [Tableau comprenant la liste des articles ainsi que les ID des articles commandés]
+   *
+   * @return  {[JSON]}        [Récap de la commande + numéro de commande]
+   */
   async postPanier(user) {
     const contact = JSON.stringify(user);
     const option = {
@@ -33,10 +60,17 @@ class DataManager {
 
     const data = await fetch("http://localhost:3000/api/cameras/order", option);
     return await data.json();
-
-
   }
 
+
+
+  /**
+   * [findInProducts description]
+   *
+   * @param   {[type]}  productId  [productId description]
+   *
+   * @return  {[type]}             [return description]
+   */
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
       if (this.products[i]._id === productId) return this.products[i];
@@ -44,15 +78,34 @@ class DataManager {
     throw ("can't find product");
   }
 
+
+
+  /**
+   * [Sauvegarde le panier dans le localStorage]
+   *
+   * @param   {[Array]}  cartContent  [Array comprenant les ID des cameras commandées]
+   *
+   */
   saveCart(cartContent) {
     localStorage.setItem("cart", JSON.stringify(cartContent));
   }
 
+  /**
+   * [Charge le panier à partir du localStorage]
+   *
+   * @return  {[JSON]}  [Contenu du panier en JSON]
+   */
   reloadCart() {
     const content = localStorage.getItem("cart");
     if (content === null) return [];
     return JSON.parse(content);
   }
+
+  /**
+   * [Vide le localStorage (Panier)]
+   *
+   * @return  {[type]}  [Cart localStorage vide + redirection page d'accueil]
+   */
   deletePanier() {
     localStorage.clear(Cart);
     orinoco.cart.content = [];

@@ -1,7 +1,7 @@
 class Panier {
 
     /**
-     * insert la page d'accueil 
+     * Insert la page d'accueil 
      *
      * @param   {HTMLElement}  domTarget  [domTarget description]
      *
@@ -13,14 +13,12 @@ class Panier {
 
 
     /**
-     * recupère les données et affiche la page home dans le DOM
+     * Récupère les données et affiche la page home dans le DOM
      *  
      * @param   {HTMLElement}  domTarget  [domTarget description]
      * 
      * @returns {void}                     affiche dans le DOM
      */
-
-
     async getData(domTarget) {
         let content = "";
         let listePanier = [];
@@ -30,6 +28,13 @@ class Panier {
     }
 
 
+    /**
+     * [render description]
+     *
+     * @param   {HTMLElement}  domTarget  [domTarget description]
+     *
+     * @return  {void}             [Affiche dans le DOM le Panier]
+     */
     render(domTarget) {
         let html = "";
         let total = 0;
@@ -64,6 +69,15 @@ class Panier {
         return retour;
     }
 
+
+    /**
+     * [Affiche la page panier]
+     *
+     * @param   {[HTMLElement]}  contenuPanier  [Contenu du Panier]
+     * @param   {[HTMLElement]}  total          [Le Total]
+     *
+     * @return  {[void]}                 [Affiche dans le DOM]
+     */
     templatePanier(contenuPanier, total) {
 
         return `
@@ -114,23 +128,37 @@ class Panier {
         
         <div id="myModal" class="modal">
         </div>
-   
-
-
                     `;
     }
 
+    /**
+     * [Ajout une quantité d'un article donné]
+     *
+     * @param   {id}  id  [ID de la caméra]
+     *
+     */
     plus(id) {
         this.products[id].qte++;
         this.updateCount();
     }
 
+    /**
+     * [Retire une quantité d'un article donné]
+     *
+     * @param   {id}  id  [ID de la caméra]
+     *
+     */
     moins(id) {
         if (this.products[id].qte === 0) return this.removeProduct(id);
         this.products[id].qte--;
         this.updateCount();
     }
 
+    /**
+     * [Met à jour le contenu du panier]
+     *
+     * @return  {[type]}  [Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier]
+     */
     updateCount() {
         const newCart = [];
         for (const [key, value] of Object.entries(this.products)) {
@@ -143,18 +171,25 @@ class Panier {
         orinoco.cart.updateFromPagePanier(newCart);
     }
 
+
+    /**
+     * [Supprime un article donné]
+     *
+     * @param   {id}  id  [ID de la caméra]
+     *
+     */
     removeProduct(id) {
         delete this.products[id];
         this.updateCount();
     }
 
-    
+
     /**
-     * [sendForm description]
+     * [Création d'un objet comprenant les données du formulaire + la liste des articles au format souhaité par l'API]
      *
      * @param   {Event}  event  [event description]
      *
-     * @return  {[type]}         [return description]
+     * @return  {[type]}         [Affiche dans le DOM un modal du resultat de l'envoi]
      */
     async sendForm(e) {
         e.stopPropagation();
@@ -170,7 +205,6 @@ class Panier {
                 product.push(value._id);
             }
         }
-
         const contact = {
             "contact": {
                 "lastName": nom,
@@ -184,89 +218,88 @@ class Panier {
 
         const result = await orinoco.dataManager.postPanier(contact);
         this.afficheModal(result);
- 
+
     }
 
-
+    /**
+     * [Affiche sous forme de modal le résultat de la requete]
+     *
+     * @param   {[Json]}  data  [Formulaire + Panier]
+     *
+     * @return  {[type]}        [Affiche dans le DOM]
+     */
     async afficheModal(data) {
         let recap = "";
-        let liste =[];
-        let recapTotal= 0;
+        let liste = [];
+        let recapTotal = 0;
         const prod = data.products;
         for (let i = 0, size = prod.length; i < size; i++) {
-        liste.push(prod[i]._id);        
+            liste.push(prod[i]._id);
         }
         const validPanier = await this.cartArrayToCartObject(liste);
         for (const value of Object.values(validPanier)) {
-            recapTotal +=value.price * value.qte /100;
-            recap += `<div class="recap">
-            <div class="recap-titre">${value.name}</div>
-            <div class="recap-qte">Quantité : ${value.qte}</div>
-            <div class="recap-price">${(value.price) / 100 * value.qte} €</div>                       
-            </div>`;
+            recapTotal += value.price * value.qte / 100;
+            recap += `
+            <div class="recap">
+                <div class="recap-titre">${value.name}</div>
+                <div class="recap-qte">Quantité : ${value.qte}</div>
+                <div class="recap-price">${(value.price) / 100 * value.qte} €</div>                       
+            </div>
+            `;
         }
-
-
-
-        
-          
-      
         const content = `
-        <!-- Modal content -->
         <div class="modal-content">
-        <div class="modal-header">
-        <h2>Commande validée.</h2>
-        <p>N° ${data.orderId}</p>
-        
-        </div>
-
-        <div class="modal-body">
-<hr>
-            <div class="modal-section">
-            <div class="modal-section-titre">Récapitulatif :</div>
-            ${recap}
-            <hr>
-            <div class="modal-total"> 
-           
-            Montant total : ${recapTotal} €
-            </div>
-            </div>
-            <hr>
-            <div class="modal-section">
-            <div class="modal-section-titre">Adresse de Livraison :</div>            
-                <p>${data.contact.lastName} ${data.contact.firstName}</p>  
-                <p>${data.contact.address} </p>
-                <p>${data.contact.city} </p>
-            </div>
-            <hr>
-            <div class="modal-facture">
-            <p><h3>Orinoco</h3> vous remercie pour votre commande. Une facture vous sera envoyée sur votre addresse mail : <p class="mail">${data.contact.email}</p></p>           
+            
+            <div class="modal-header">
+                <h2>Commande validée.</h2>
+                <p>N° ${data.orderId}</p>        
             </div>
 
-        </div>
-        <div class="modal-footer">
+            <div class="modal-body">
+                <hr>
+                <div class="modal-section">
+                    <div class="modal-section-titre">Récapitulatif :</div>
+                    ${recap}
+                    <hr>
+                    <div class="modal-total">            
+                        Montant total : ${recapTotal} €
+                    </div>
+                </div>
+                <hr>
+                <div class="modal-section">
+                    <div class="modal-section-titre">Adresse de Livraison :</div>            
+                    <p>${data.contact.lastName} ${data.contact.firstName}</p>  
+                    <p>${data.contact.address} </p>
+                    <p>${data.contact.city} </p>
+                </div>                
+                <hr>
+                <div class="modal-facture">
+                    <p><h3>Orinoco</h3> vous remercie pour votre commande. Une facture vous sera envoyée sur votre addresse mail : <p class="mail">${data.contact.email}</p></p>           
+                </div>
+            </div>
 
-        <div class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</div>
-
+            <div class="modal-footer">  
+                <div class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</div>
+            </div>
         </div>
-        </div>
-
         `;
         const domTarget = document.querySelector(".modal");
         domTarget.innerHTML = content;
         this.optionModal();
-
     }
 
+
+    /**
+     * [Permet de rendre visible le modal]
+     *
+     * @return  {[type]}  [Affiche le Modal]
+     */
     optionModal() {
-
         let modal = document.getElementById("myModal");
-
         modal.style.display = "block";
-
     }
 
-    
+
 
 
 }

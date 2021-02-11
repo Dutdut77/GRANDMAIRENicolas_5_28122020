@@ -1,21 +1,26 @@
 class Produit {
 
     /**
-     * insert la page d'accueil 
+     * Récupère le domTarget et l'id de la caméra
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  [Target de la page produit]
      *
      * @constructor
      */
-
-
     constructor(domTarget, productId) {
 
         this.getData(domTarget, productId);
 
     }
 
-
+    /**
+     * [Affiche la page produit]
+     *
+     * @param   {HTMLElement}  domTarget  [Target de la page produit]
+     * @param   {id}  productId  [id du produit demmandé]
+     *
+     * @return  {[type]}             [Affiche dans le DOM]
+     */
     async getData(domTarget, productId) {
 
         const specs = await orinoco.dataManager.getProduct(productId);
@@ -29,7 +34,13 @@ class Produit {
     }
 
 
-
+    /**
+     * [Donne les options pour le SELECT des caméras]
+     *
+     * @param   {[id]}  nameSelect  [id de la caméra selectionné]
+     *
+     * @return  {[HTML]}              [Liste des options]
+     */
     async selectCamera(nameSelect) {
         let content = "";
         let listeName = "";

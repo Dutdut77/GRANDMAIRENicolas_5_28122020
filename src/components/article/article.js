@@ -7,7 +7,13 @@ class Article {
     price;
     _id;
 
-
+    /**
+     * [Transforme le JSON en Tableau]
+     *
+     * @param   {[JSON]}  specs  [JSON de l'API]
+     *
+     * @return  {[Array]}         [JSON transformer en ARRAY]
+     */
     constructor(specs) {
         for (const [key, value] of Object.entries(specs)) {
             this[key] = value;
@@ -15,7 +21,11 @@ class Article {
     }
 
 
-
+    /**
+     * [Affiche les cameras sur la page d'accueil]
+     *
+     * @return  {[HTML]}  [Affiche dans le DOM]
+     */
     afficheResume() {
         return `
         <div class="card">
@@ -35,6 +45,12 @@ class Article {
              `;
     }
 
+
+    /**
+     * [Affiche le détail d'une caméra]
+     *
+     * @return  {[HTML]}  [Affiche dans le DOM]
+     */
     afficheDetails() {
 
         return `
@@ -70,8 +86,14 @@ class Article {
              `;
     }
 
-    showPanier(){
-     return ` <div class="show_panier">                
+
+    /**
+     * [Affiche le contenu Panier]
+     *
+     * @return  {[HTML]}  [Affiche dans le DOM]
+     */
+    showPanier() {
+        return ` <div class="show_panier">                
       <div class="card_panier_img">
               <div class="panier_img" style="background-image: url('${this.imageUrl}');"></div>
       </div>              
@@ -96,10 +118,16 @@ class Article {
       </div> 
 
   </div>
-`; 
+`;
     }
 
-
+    /**
+     * [Affiche les OPTIONS du SELECT - Choix de l'objectif]
+     *
+     * @param   {[Array]}  variants  [Tableau contenant la liste des objectifs d'une caméra]
+     *
+     * @return  {[HTML]}            [Affiche dans le DOM]
+     */
     showVariants(variants) {
         let content = "";
         for (let i = 0, size = variants.length; i < size; i++) {
@@ -109,7 +137,12 @@ class Article {
         return content;
     }
 
-
+    
+    /**
+     * [Fonction pour changer de page vers la page produit]
+     *
+     * @return  {[HTML]}  [Redirection vers produits.js]
+     */
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }

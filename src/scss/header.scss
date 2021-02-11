@@ -1,25 +1,24 @@
 header {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    background-color: white;
-    width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: white;
+  width: 100%;
+}
 
-  }
+.logo {
+  height: 100%;
+}
 
-  .logo {
-    height: 100%;
-  }
-  
 .shopping_cart {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    cursor: pointer;
-    width: 60px;
- 
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  width: 60px;
+
   &::before {
     padding: 0 15px 0 15px;
     font-weight: 900;
@@ -28,10 +27,7 @@ header {
     font-size: 1.6em;
     cursor: pointer;
   }
- }
-  
-
-
+}
 
 #menuCheck,
 .menu-icon {
@@ -40,7 +36,7 @@ header {
   display: none;
 }
 
-.menu-icon {  
+.menu-icon {
   color: black;
   position: relative;
   z-index: 20;
@@ -51,8 +47,8 @@ header {
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   color: black;
   z-index: 10;
-  top :0;
-  left : 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   list-style: none;
@@ -61,11 +57,9 @@ header {
   justify-content: center;
   align-items: center;
   transition: all 0.4s;
-  
 }
 
-#menuCheck:checked~ .menu-list {
- 
+#menuCheck:checked ~ .menu-list {
   transform: translate(-100%, -100%);
 }
 
@@ -79,25 +73,20 @@ header {
 }
 
 .menu-list li::after {
-  content: '';
+  content: "";
   display: block;
   width: 0;
   height: 1px;
-  margin-top : 1px; 
-  margin-left : -12%;
+  margin-top: 1px;
+  margin-left: -12%;
   transition: 0.3s ease;
   background: black;
 }
 .menu-list li:hover::after {
   width: 120%;
- 
 }
 
-
-
-
-
-#menuCheck:checked~.menu-list li {
+#menuCheck:checked ~ .menu-list li {
   opacity: 0;
 }
 
@@ -113,15 +102,14 @@ header {
   align-items: center;
 }
 
-
 label .fa-bars,
-#menuCheck:checked~label .fa-times {
+#menuCheck:checked ~ label .fa-times {
   display: none;
   font-size: 1.6rem;
 }
 
 label .fa-times,
-#menuCheck:checked~label .fa-bars {
+#menuCheck:checked ~ label .fa-bars {
   display: block;
   font-size: 1.6rem;
 }
