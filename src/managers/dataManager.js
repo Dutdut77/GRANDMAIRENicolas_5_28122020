@@ -110,6 +110,6 @@ class DataManager {
     localStorage.clear(Cart);
     orinoco.cart.content = [];
     orinoco.cart.render();
-    orinoco.pageManager.changePage('');
+    orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne');
   }
 }

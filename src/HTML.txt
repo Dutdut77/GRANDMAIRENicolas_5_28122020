@@ -1,0 +1,271 @@
+HTML
+<form novalidate>
+  <p>
+    <label for="nom">
+      <span>Nom :</span>
+      <input type="text" id="nom" name="nom">
+      <span class="error_nom" aria-live="polite"></span>
+    </label>
+  <p>
+    <p>
+    <label for="prenom">
+      <span>Prénom :</span>
+      <input type="text" id="prenom" name="prenom">
+      <span class="error_prenom" aria-live="polite"></span>
+    </label>
+  <p>
+    <p>
+    <label for="adresse">
+      <span>Adresse :</span>
+      <input type="text" id="adresse" name="adresse">
+      <span class="error_adresse" aria-live="polite"></span>
+    </label>
+  <p>
+    <p>
+    <label for="ville">
+      <span>Ville :</span>
+      <input type="text" id="ville" name="ville">
+      <span class="error_ville" aria-live="polite"></span>
+    </label>
+  <p>
+    <p>
+    <label for="mail">
+      <span>Email :</span>
+      <input type="text" id="mail" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$" name="mail">
+      <span class="error" aria-live="polite"></span>
+    </label>
+  <p>
+  <button>Envoyer</button>
+</form>
+
+
+
+
+JS
+// Il y a plusieurs façon de sélectionner un nœud DOM ; ici on récupère
+// le formulaire et le champ d'e-mail ainsi que l'élément span
+// dans lequel on placera le message d'erreur
+
+let form  = document.getElementsByTagName('form')[0];
+let nom = document.getElementById('nom');
+let prenom = document.getElementById('prenom');
+let adresse = document.getElementById('adresse');
+let ville = document.getElementById('ville');
+let email = document.getElementById('mail');
+let error = document.querySelector('.error');
+let error_nom = document.querySelector('.error_nom');
+let error_prenom = document.querySelector('.error_prenom');
+let error_adresse = document.querySelector('.error_adresse');
+let error_ville = document.querySelector('.error_ville');
+
+nom.addEventListener("input", function (event) {
+  // Chaque fois que l'utilisateur saisit quelque chose
+   // on vérifie la validité du champ e-mail.
+  if (nom.value != "") {
+    // S'il y a un message d'erreur affiché et que le champ
+    // est valide, on retire l'erreur
+    error_nom.innerHTML = ""; // On réinitialise le contenu
+    error_nom.className = "error"; // On réinitialise l'état visuel du message
+  }
+}, false);
+
+prenom.addEventListener("input", function (event) {
+  // Chaque fois que l'utilisateur saisit quelque chose
+  
+  // on vérifie la validité du champ e-mail.
+  if (prenom.value != "") {
+    // S'il y a un message d'erreur affiché et que le champ
+    // est valide, on retire l'erreur
+    error_prenom.innerHTML = ""; // On réinitialise le contenu
+    error_prenom.className = "error"; // On réinitialise l'état visuel du message
+  }
+}, false);
+
+adresse.addEventListener("input", function (event) {
+  // Chaque fois que l'utilisateur saisit quelque chose
+  
+  // on vérifie la validité du champ e-mail.
+  if (adresse.value != "") {
+    // S'il y a un message d'erreur affiché et que le champ
+    // est valide, on retire l'erreur
+    error_adresse.innerHTML = ""; // On réinitialise le contenu
+    error_adresse.className = "error"; // On réinitialise l'état visuel du message
+  }
+}, false);
+
+ville.addEventListener("input", function (event) {
+  // Chaque fois que l'utilisateur saisit quelque chose
+  
+  // on vérifie la validité du champ e-mail.
+  if (ville.value != "") {
+    // S'il y a un message d'erreur affiché et que le champ
+    // est valide, on retire l'erreur
+    error_ville.innerHTML = ""; // On réinitialise le contenu
+    error_ville.className = "error"; // On réinitialise l'état visuel du message
+  }
+}, false);
+
+email.addEventListener("input", function (event) {
+  // Chaque fois que l'utilisateur saisit quelque chose
+  // on vérifie la validité du champ e-mail.
+  if (email.value != "") {
+    // S'il y a un message d'erreur affiché et que le champ
+    // est valide, on retire l'erreur
+    error.innerHTML = ""; // On réinitialise le contenu
+    error.className = "error"; // On réinitialise l'état visuel du message
+  }
+}, false);
+
+
+
+form.addEventListener("submit", function (event) {
+  // Chaque fois que l'utilisateur tente d'envoyer les données
+  // on vérifie que le champ email est valide.
+     if (nom.value == "") {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error_nom.innerHTML = "Nom obligatoire";
+    error_nom.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+      if (prenom.value == "") {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error_prenom.innerHTML = "Prénom obligatoire";
+    error_prenom.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+      if (adresse.value == "") {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error_adresse.innerHTML = "Adresse obligatoire";
+    error_adresse.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+      if (ville.value == "") {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error_ville.innerHTML = "Ville Obligatoire";
+    error_ville.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+  
+  if (email.validity.patternMismatch) {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error.innerHTML = "Adresse Email incorrecte";
+    error.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+  
+    if (email.value == "") {
+
+    // S'il est invalide, on affiche un message d'erreur personnalisé
+    error.innerHTML = "Email Obligatoire";
+    error.className = "error active";
+    // Et on empêche l'envoi des données du formulaire
+    event.preventDefault();
+  }
+  
+}, false);
+
+
+
+
+
+CSS
+/* Juste pour que notre exemple soit plus joli */
+body {
+  font: 1em sans-serif;
+  padding: 0;
+  margin : 20;
+}
+
+form {
+  max-width: 300px;
+}
+
+p * {
+  display: block;
+}
+
+input[type=email]{
+  -webkit-appearance: none;
+
+  width: 100%;
+  border: 1px solid #333;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 90%;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Voici notre composition pour les champs invalides */
+input:invalid{
+  border-color: #900;
+  background-color: #FDD;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* Voici la mise en forme pour les erreurs */
+.error {
+  width  : 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
+
+
+
+
+
+ANCIEN HTML
+            <div class="contact">
+                    <h2> Vos coordonnées :</h2>               
+                    <div class="form__group">
+                        <label for="nom">Nom : </label>
+                        <input type="text" name="nom" id="nom">
+                    </div>
+                    <div class="form__group">
+                        <label for="prenom">Prénom: </label>
+                        <input type="text" name="prenom" id="prenom">
+                    </div>
+                    <div class="form__group">
+                        <label for="adresse">Adresse : </label>
+                        <input type="text" name="adresse" id="adresse">
+                    </div>
+                    <div class="form__group">
+                        <label for="ville">Ville :</label>
+                        <input type="text" name="ville" id="ville">
+                    </div>
+                    <div class="form__group">
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+
+                    <div class="form-btn">
+                        <button class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)" value="Valider votre commande">Valider votre commande</button>
+                    </div>         
+            </div>

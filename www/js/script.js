@@ -1,62 +1,3 @@
-class Cart {
-
-    content = orinoco.dataManager.reloadCart();
-
-    /**
-     * [Insert le nombre d'article dans le panier]
-     *
-     * @param   {[HTMLElement]}  domTarget  [cible]
-     *
-     */
-    constructor(domTarget) {
-        this.DOM = document.createElement("cart");
-        this.domTarget = domTarget;
-        this.render();
-    }
-
-    /**
-     * [Actualise le nombre d'article dans le panier]
-     *
-     * @return  {[number]}  [Nombre d'article dans le panier]
-     */
-    render() {
-
-        if (this.content.length > 0) {
-            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
-            this.DOM.innerText = this.content.length;
-            return;
-        }
-        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
-    }
-
-
-    /**
-     * [Ajoute un article dans le panier]
-     *
-     * @param   {[id]}  productId  [Id de la caméra ajoutée]
-     *
-     * @return  {[type]}             [Nouveau rendu + actualisation du LocalStorage]
-     */
-    add(productId) {
-        this.content.push(productId);
-        this.render();
-        orinoco.dataManager.saveCart(this.content);
-    }
-
-
-    /**
-     * [updateFromPagePanier description]
-     *
-     * @param   {[type]}  newCart  [newCart description]
-     *
-     * @return  {[type]}           [return description]
-     */
-    updateFromPagePanier(newCart) {
-        this.content = newCart;
-        this.render();
-    }
-
-}
 class Article {
 
     description;
@@ -208,6 +149,66 @@ class Article {
 
 
 }
+class Cart {
+
+    content = orinoco.dataManager.reloadCart();
+
+    /**
+     * [Insert le nombre d'article dans le panier]
+     *
+     * @param   {[HTMLElement]}  domTarget  [cible]
+     *
+     */
+    constructor(domTarget) {
+        this.DOM = document.createElement("cart");
+        this.domTarget = domTarget;
+        this.render();
+    }
+
+    /**
+     * [Actualise le nombre d'article dans le panier]
+     *
+     * @return  {[number]}  [Nombre d'article dans le panier]
+     */
+    render() {
+
+        if (this.content.length > 0) {
+            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
+            this.DOM.innerText = this.content.length;
+            return;
+        }
+        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
+    }
+
+
+    /**
+     * [Ajoute un article dans le panier]
+     *
+     * @param   {[id]}  productId  [Id de la caméra ajoutée]
+     *
+     * @return  {[type]}             [Nouveau rendu + actualisation du LocalStorage]
+     */
+    add(productId) {
+        this.content.push(productId);
+        this.render();
+        orinoco.dataManager.saveCart(this.content);
+    }
+
+
+    /**
+     * [updateFromPagePanier description]
+     *
+     * @param   {[type]}  newCart  [newCart description]
+     *
+     * @return  {[type]}           [return description]
+     */
+    updateFromPagePanier(newCart) {
+        this.content = newCart;
+        this.render();
+    }
+
+}
+
 class Home {
 
     /**
@@ -253,6 +254,7 @@ class Panier {
      */
     constructor(domTarget) {
         this.getData(domTarget);
+        
     }
 
 
@@ -340,6 +342,8 @@ class Panier {
                 </div>
             </div>
 
+            
+
             <div class="contact">
                     <h2> Vos coordonnées :</h2>               
                     <div class="form__group">
@@ -364,9 +368,12 @@ class Panier {
                     </div>
 
                     <div class="form-btn">
-                        <div class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)">Valider votre commande</div>
+                        <button class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)" value="Valider votre commande">Valider votre commande</button>
                     </div>         
             </div>
+
+
+
 
         </div>
         
@@ -544,13 +551,7 @@ class Panier {
     }
 
 
-
-
 }
-
-
-
-
 
 
 
@@ -731,7 +732,7 @@ class DataManager {
     localStorage.clear(Cart);
     orinoco.cart.content = [];
     orinoco.cart.render();
-    orinoco.pageManager.changePage('');
+    orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne');
   }
 }
 class PageManager {

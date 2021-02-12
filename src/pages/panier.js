@@ -9,6 +9,7 @@ class Panier {
      */
     constructor(domTarget) {
         this.getData(domTarget);
+        
     }
 
 
@@ -96,6 +97,8 @@ class Panier {
                 </div>
             </div>
 
+            
+
             <div class="contact">
                     <h2> Vos coordonnées :</h2>               
                     <div class="form__group">
@@ -120,9 +123,12 @@ class Panier {
                     </div>
 
                     <div class="form-btn">
-                        <div class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)">Valider votre commande</div>
+                        <button class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)" value="Valider votre commande">Valider votre commande</button>
                     </div>         
             </div>
+
+
+
 
         </div>
         
@@ -300,13 +306,7 @@ class Panier {
     }
 
 
-
-
 }
-
-
-
-
 
 
 
