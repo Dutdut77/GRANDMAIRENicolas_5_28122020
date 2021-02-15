@@ -1,18 +1,26 @@
 class PageManager {
 
-  page;
-  domTarget;
+  /**
+   * la représentation de la page (classe)
+   * @type {*}
+   */
+  page = null;
+
+  /**
+   * la représentation du DOM dans la classe
+   * @type {HTMLElement|null}
+   */
+  domTarget = null;
   /**
    * [constructor description]
    *
-   * @param   {[HTMLElement]}  domTarget  [domTarget description]
+   * @param   {[HTMLElement}  domTarget  [domTarget description]
    *
    */
   constructor(domTarget) {
     this.domTarget = domTarget;
     this.showPage(window.location.search.slice(1));
     window.onpopstate = () => this.showPage(window.location.search.slice(1));
-
   }
 
 

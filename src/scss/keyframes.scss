@@ -8,3 +8,14 @@
     opacity: 1;
   }
 }
+
+@keyframes headshake {
+  25% {
+      // entièrement à droite
+      transform: translateX(1%);
+  }
+  75% {
+      // entièrement à gauche
+      transform: translateX(1% * -1);
+  }
+}

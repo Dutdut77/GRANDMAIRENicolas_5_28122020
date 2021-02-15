@@ -163,14 +163,41 @@
 
   transition: background-color 500ms;
 }
-.form__group input:focus {
-  border: 1px solid rgb(118, 0, 148);
+.form__group input:focus{
+  border: 1px solid $color-secondary;
 }
+
 .form__group input:not(:focus):invalid {
-  background-color: red;
   border: 1px solid red;
   color: black;
+  animation: headshake 100ms cubic-bezier(.4,.1,.6,.9) 2;
 }
+.success:not(:focus){
+  border: 1px solid green;
+}
+.empty::after {
+  content:  "(*)";
+  color : red;
+  width : 100%;
+}
+.badFormatNom::after {
+  content:  "(Minimum 2 lettres en majuscule)";
+  color : red;
+  width : 100%;
+}
+.badFormatPrenom::after {
+  content:  "(1ère lettre en majuscule)";
+  color : red;
+  width : 100%;
+}
+.badFormat::after {
+  content:  "(Mauvais Format)";
+  color : red;
+  width : 100%;
+}
+
+
+
 
 .form-btn {
   padding: 30px 20px 20px 20px;
@@ -184,7 +211,7 @@
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  box-shadow: 0 0 20px #eee;
+  box-shadow: 0 0 10px #eee;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -192,11 +219,15 @@
   cursor: pointer;
 }
 
+
+
 .valid-btn:hover {
   background-position: right center;
   color: #fff;
   text-decoration: none;
 }
+
+
 
 .modal {
   display: none;

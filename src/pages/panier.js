@@ -1,6 +1,11 @@
 class Panier {
 
     /**
+     * champs à valider
+     * @type {Object}
+     */
+    fields = {}
+    /**
      * Insert la page d'accueil 
      *
      * @param   {HTMLElement}  domTarget  [domTarget description]
@@ -9,7 +14,7 @@ class Panier {
      */
     constructor(domTarget) {
         this.getData(domTarget);
-        
+        ["nom", "prenom", "adresse", "ville", "email"].forEach(field => this.fields[field] = false);
     }
 
 
@@ -102,28 +107,28 @@ class Panier {
             <div class="contact">
                     <h2> Vos coordonnées :</h2>               
                     <div class="form__group">
-                        <label for="nom">Nom : </label>
-                        <input type="text" name="nom" id="nom">
+                        <label for="nom">Nom : <span class="error_nom" aria-live="polite"></span></label>
+                        <input type="text" name="nom" id="nom" pattern="[A-Z]{2,}" oninput="orinoco.pageManager.page.isValid(this)">
                     </div>
                     <div class="form__group">
-                        <label for="prenom">Prénom: </label>
-                        <input type="text" name="prenom" id="prenom">
+                        <label for="prenom">Prénom: <span class="error_prenom" aria-live="polite"></span></label>
+                        <input type="text" name="prenom" id="prenom" pattern="[A-Z][a-z]{1,}" oninput="orinoco.pageManager.page.isValid(this)">
                     </div>
                     <div class="form__group">
-                        <label for="adresse">Adresse : </label>
-                        <input type="text" name="adresse" id="adresse">
+                        <label for="adresse">Adresse : <span class="error_adresse" aria-live="polite"></span></label>
+                        <input type="text" name="adresse" id="adresse" oninput="orinoco.pageManager.page.isValid(this)">
                     </div>
                     <div class="form__group">
-                        <label for="ville">Ville :</label>
-                        <input type="text" name="ville" id="ville">
+                        <label for="ville">Ville :<span class="error_ville" aria-live="polite"></span></label>
+                        <input type="text" name="ville" id="ville" oninput="orinoco.pageManager.page.isValid(this)">
                     </div>
                     <div class="form__group">
-                        <label for="email">Email :</label>
-                        <input type="email" name="email" id="email">
+                        <label for="email">Email :<span class="error_email" aria-live="polite"></span></label>
+                        <input type="email" name="email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$" oninput="orinoco.pageManager.page.isValid(this)">
                     </div>
 
                     <div class="form-btn">
-                        <button class="valid-btn" type="button" onclick="orinoco.pageManager.page.sendForm(event)" value="Valider votre commande">Valider votre commande</button>
+                        <button class="valid-btn" type="button" id="valid-btn" onclick="orinoco.pageManager.page.sendForm(event)" disabled value="Valider votre commande">Valider votre commande</button>
                     </div>         
             </div>
 
@@ -304,6 +309,127 @@ class Panier {
         let modal = document.getElementById("myModal");
         modal.style.display = "block";
     }
+
+    /**
+     * [isValid description]
+     *
+     * @param   {HTMLElement}  input  [input description]
+     *
+     * @return  {[type]}         [return description]
+     */
+    isValid(input) {
+
+        if (input.name == "nom") {
+            let error = document.querySelector('.error_nom');
+
+            if (input.value === "") {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_nom empty";
+
+            }
+
+            if (!input.validity.valid) {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_nom badFormatNom";
+            }
+
+            error.className = "error_nom";
+
+        }
+
+        if (input.name == "prenom") {
+            let error = document.querySelector('.error_prenom');
+            if (input.value === "") {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_prenom empty";
+            }
+
+            if (!input.validity.valid) {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_prenom badFormatPrenom";
+            }
+
+            error.className = "error_prenom";
+        }
+
+        if (input.name == "adresse") {
+            let error = document.querySelector('.error_adresse');
+            if (input.value === "") {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_adresse empty";
+            }
+
+            if (!input.validity.valid) {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_adresse badFormat";
+            }
+
+            error.className = "error_adresse";
+        }
+
+        if (input.name == "ville") {
+            let error = document.querySelector('.error_ville');
+            if (input.value === "") {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_ville empty";
+            }
+
+            if (!input.validity.valid) {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_ville badFormat";
+            }
+
+            error.className = "error_ville";
+        }
+
+        if (input.name == "email") {
+            let error = document.querySelector('.error_email');
+            if (input.value === "") {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_email empty";
+
+            }
+
+            if (!input.validity.valid) {
+                input.className = "";
+                this.fields[input.id] = false;
+                document.getElementById("valid-btn").disabled = true;
+                return error.className = "error_email badFormat";
+            }
+
+            error.className = "error_email";
+        }
+
+
+        input.className = "success";
+        this.fields[input.id] = true;
+
+        let validated = 0;
+        const size = Object.values(this.fields).length;
+        for (const value of Object.values(this.fields)) {
+            if (value) validated++;
+        }
+        if (validated === size) {
+            document.getElementById("valid-btn").disabled = false;
+        }
 
 
 }

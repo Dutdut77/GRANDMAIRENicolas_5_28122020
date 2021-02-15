@@ -58,7 +58,7 @@ class DataManager {
       body: contact
     }
 
-    const data = await fetch("http://localhost:3000/api/cameras/order", option);
+    const data = await fetch(this.src+ "/order", option);
     return await data.json();
   }
 

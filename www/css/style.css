@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @keyframes animatetop {
   from {
     top: -300px;
@@ -5,6 +6,12 @@
   to {
     top: 0;
     opacity: 1; } }
+
+@keyframes headshake {
+  25% {
+    transform: translateX(1%); }
+  75% {
+    transform: translateX(-1%); } }
 
 header {
   display: flex;
@@ -545,12 +552,35 @@ cart {
   transition: background-color 500ms; }
 
 .form__group input:focus {
-  border: 1px solid #760094; }
+  border: 1px solid #5f729e; }
 
 .form__group input:not(:focus):invalid {
-  background-color: red;
   border: 1px solid red;
-  color: black; }
+  color: black;
+  animation: headshake 100ms cubic-bezier(0.4, 0.1, 0.6, 0.9) 2; }
+
+.success:not(:focus) {
+  border: 1px solid green; }
+
+.empty::after {
+  content: "(*)";
+  color: red;
+  width: 100%; }
+
+.badFormatNom::after {
+  content: "(Minimum 2 lettres en majuscule)";
+  color: red;
+  width: 100%; }
+
+.badFormatPrenom::after {
+  content: "(1ère lettre en majuscule)";
+  color: red;
+  width: 100%; }
+
+.badFormat::after {
+  content: "(Mauvais Format)";
+  color: red;
+  width: 100%; }
 
 .form-btn {
   padding: 30px 20px 20px 20px; }
@@ -563,7 +593,7 @@ cart {
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  box-shadow: 0 0 20px #eee;
+  box-shadow: 0 0 10px #eee;
   border-radius: 5px;
   display: flex;
   justify-content: center;

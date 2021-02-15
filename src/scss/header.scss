@@ -6,6 +6,7 @@ header {
   height: 60px;
   background-color: white;
   width: 100%;
+
 }
 
 .logo {
@@ -34,7 +35,7 @@ header {
   width: 0;
   height: 0;
   display: none;
-}
+  }
 
 .menu-icon {
   color: black;
@@ -70,6 +71,7 @@ header {
   margin-bottom: 40px;
   opacity: 1;
   transition: opacity 1s;
+
 }
 
 .menu-list li::after {
