@@ -3,7 +3,7 @@ class Produit {
     /**
      * Récupère le domTarget et l'id de la caméra
      *
-     * @param   {HTMLElement}  domTarget  [Target de la page produit]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -14,12 +14,12 @@ class Produit {
     }
 
     /**
-     * [Affiche la page produit]
+     * Affiche la page produit
      *
-     * @param   {HTMLElement}  domTarget  [Target de la page produit]
-     * @param   {id}  productId  [id du produit demmandé]
+     * @param   {HTMLElement}  domTarget  Balise main
+     * @param   {id}  productId  id du produit demmandé
      *
-     * @return  {[type]}             [Affiche dans le DOM]
+     * @return  {HTMLElement}             Affiche dans le DOM
      */
     async getData(domTarget, productId) {
 
@@ -35,11 +35,11 @@ class Produit {
 
 
     /**
-     * [Donne les options pour le SELECT des caméras]
+     * Donne les options pour le SELECT des caméras
      *
-     * @param   {[id]}  nameSelect  [id de la caméra selectionné]
+     * @param   {id}  nameSelect           id de la caméra selectionné
      *
-     * @return  {[HTML]}              [Liste des options]
+     * @return  {HTMLElement}              Liste des options
      */
     async selectCamera(nameSelect) {
         let content = "";

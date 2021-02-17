@@ -11,10 +11,12 @@ class PageManager {
    * @type {HTMLElement|null}
    */
   domTarget = null;
+
+
   /**
-   * [constructor description]
+   * constructor description
    *
-   * @param   {[HTMLElement}  domTarget  [domTarget description]
+   * @param   {HTMLElement}  domTarget  Balise main
    *
    */
   constructor(domTarget) {
@@ -25,11 +27,11 @@ class PageManager {
 
 
   /**
-   * [Affiche la page demandée]
+   * Affiche la page demandée
    *
-   * @param   {[URL]}  nom_url  [Nom de la page]
+   * @param   {URL}  nom_url  Nom de la page
    *
-   * @return  {[HTML]}           [Redirection vers la page demandée]
+   * @return  {HTML}           Redirection vers la page demandée
    */
   showPage(nom_url) {
 
@@ -41,12 +43,11 @@ class PageManager {
   }
 
   /**
-   * [Récupère le nom de la page demandée ainsi que son titre]
+   * Récupère le nom de la page demandée ainsi que son titre
    *
-   * @param   {[Text]}  newPage  [Nom de la page]
-   * @param   {[Text]}  title    [Titre de la page]
+   * @param   {Text}  newPage  Nom de la page
+   * @param   {Text}  title    Titre de la page
    *
-   * @return  {[type]}           [REnvoi vers showPage pour affiche la page]
    */
   changePage(newPage, title) {
     document.getElementById("menuCheck").checked = "none";

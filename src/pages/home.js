@@ -3,7 +3,7 @@ class Home {
     /**
      * Insert la page d'accueil 
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -15,9 +15,9 @@ class Home {
     /**
      * Récupère les données et affiche la page home dans le DOM
      *  
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {void}                     affiche dans le DOM
+     * @returns {HTMLElement}             Affiche dans le DOM
      */
     async getData(domTarget) {
         let content = "";

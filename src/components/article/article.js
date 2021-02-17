@@ -8,11 +8,11 @@ class Article {
     _id;
 
     /**
-     * [Transforme le JSON en Tableau]
+     * Transforme le JSON en Tableau
      *
-     * @param   {[JSON]}  specs  [JSON de l'API]
+     * @param   {JSON}  specs  JSON de l'API
      *
-     * @return  {[Array]}         [JSON transformer en ARRAY]
+     * @return  {object}       JSON transformer en object
      */
     constructor(specs) {
         for (const [key, value] of Object.entries(specs)) {
@@ -22,9 +22,9 @@ class Article {
 
 
     /**
-     * [Affiche les cameras sur la page d'accueil]
+     * Affiche les cameras sur la page d'accueil
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     afficheResume() {
         return `
@@ -47,9 +47,9 @@ class Article {
 
 
     /**
-     * [Affiche le détail d'une caméra]
+     * Affiche le détail d'une caméra
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     afficheDetails() {
 
@@ -88,9 +88,9 @@ class Article {
 
 
     /**
-     * [Affiche le contenu Panier]
+     * Affiche le contenu Panier
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     showPanier() {
         return ` <div class="show_panier">                
@@ -122,11 +122,11 @@ class Article {
     }
 
     /**
-     * [Affiche les OPTIONS du SELECT - Choix de l'objectif]
+     * Affiche les OPTIONS du SELECT - Choix de l'objectif
      *
-     * @param   {[Array]}  variants  [Tableau contenant la liste des objectifs d'une caméra]
+     * @param   {Array}  variants  Tableau contenant la liste des objectifs d'une caméra
      *
-     * @return  {[HTML]}            [Affiche dans le DOM]
+     * @return  {HTMLElement}            Affiche dans le DOM
      */
     showVariants(variants) {
         let content = "";
@@ -137,11 +137,11 @@ class Article {
         return content;
     }
 
-    
+
     /**
-     * [Fonction pour changer de page vers la page produit]
+     * Fonction pour changer de page vers la page produit
      *
-     * @return  {[HTML]}  [Redirection vers produits.js]
+     * @return  {URL}  Redirection vers produits.js
      */
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)

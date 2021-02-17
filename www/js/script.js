@@ -1,3 +1,60 @@
+class Cart {
+
+    content = orinoco.dataManager.reloadCart();
+
+    /**
+     * Insert le nombre d'article dans le panier
+     *
+     * @param   {HTMLElement}  domTarget  .shopping_cart
+     *
+     */
+    constructor(domTarget) {
+        this.DOM = document.createElement("cart");
+        this.domTarget = domTarget;
+        this.render();
+    }
+
+    /**
+     * Actualise le nombre d'article dans le panier
+     *
+     * @return  {number}  Nombre d'article dans le panier
+     */
+    render() {
+
+        if (this.content.length > 0) {
+            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
+            this.DOM.innerText = this.content.length;
+            return;
+        }
+        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
+    }
+
+
+    /**
+     * Ajoute un article dans le panier
+     *
+     * @param   {id}  productId  Id de la caméra ajoutée
+     *
+     */
+    add(productId) {
+        this.content.push(productId);
+        this.render();
+        orinoco.dataManager.saveCart(this.content);
+    }
+
+
+    /**
+     * Actualise le nombre d'article
+     *
+     * @param   {number}  newCart Nombre d'article dans le panier
+     *
+     */
+    updateFromPagePanier(newCart) {
+        this.content = newCart;
+        this.render();
+    }
+
+}
 class Article {
 
     description;
@@ -8,11 +65,11 @@ class Article {
     _id;
 
     /**
-     * [Transforme le JSON en Tableau]
+     * Transforme le JSON en Tableau
      *
-     * @param   {[JSON]}  specs  [JSON de l'API]
+     * @param   {JSON}  specs  JSON de l'API
      *
-     * @return  {[Array]}         [JSON transformer en ARRAY]
+     * @return  {object}       JSON transformer en object
      */
     constructor(specs) {
         for (const [key, value] of Object.entries(specs)) {
@@ -22,9 +79,9 @@ class Article {
 
 
     /**
-     * [Affiche les cameras sur la page d'accueil]
+     * Affiche les cameras sur la page d'accueil
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     afficheResume() {
         return `
@@ -47,9 +104,9 @@ class Article {
 
 
     /**
-     * [Affiche le détail d'une caméra]
+     * Affiche le détail d'une caméra
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     afficheDetails() {
 
@@ -88,9 +145,9 @@ class Article {
 
 
     /**
-     * [Affiche le contenu Panier]
+     * Affiche le contenu Panier
      *
-     * @return  {[HTML]}  [Affiche dans le DOM]
+     * @return  {HTMLElement}  Affiche dans le DOM
      */
     showPanier() {
         return ` <div class="show_panier">                
@@ -122,11 +179,11 @@ class Article {
     }
 
     /**
-     * [Affiche les OPTIONS du SELECT - Choix de l'objectif]
+     * Affiche les OPTIONS du SELECT - Choix de l'objectif
      *
-     * @param   {[Array]}  variants  [Tableau contenant la liste des objectifs d'une caméra]
+     * @param   {Array}  variants  Tableau contenant la liste des objectifs d'une caméra
      *
-     * @return  {[HTML]}            [Affiche dans le DOM]
+     * @return  {HTMLElement}            Affiche dans le DOM
      */
     showVariants(variants) {
         let content = "";
@@ -137,11 +194,11 @@ class Article {
         return content;
     }
 
-    
+
     /**
-     * [Fonction pour changer de page vers la page produit]
+     * Fonction pour changer de page vers la page produit
      *
-     * @return  {[HTML]}  [Redirection vers produits.js]
+     * @return  {URL}  Redirection vers produits.js
      */
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
@@ -149,71 +206,12 @@ class Article {
 
 
 }
-class Cart {
-
-    content = orinoco.dataManager.reloadCart();
-
-    /**
-     * [Insert le nombre d'article dans le panier]
-     *
-     * @param   {[HTMLElement]}  domTarget  [cible]
-     *
-     */
-    constructor(domTarget) {
-        this.DOM = document.createElement("cart");
-        this.domTarget = domTarget;
-        this.render();
-    }
-
-    /**
-     * [Actualise le nombre d'article dans le panier]
-     *
-     * @return  {[number]}  [Nombre d'article dans le panier]
-     */
-    render() {
-
-        if (this.content.length > 0) {
-            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
-            this.DOM.innerText = this.content.length;
-            return;
-        }
-        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
-    }
-
-
-    /**
-     * [Ajoute un article dans le panier]
-     *
-     * @param   {[id]}  productId  [Id de la caméra ajoutée]
-     *
-     * @return  {[type]}             [Nouveau rendu + actualisation du LocalStorage]
-     */
-    add(productId) {
-        this.content.push(productId);
-        this.render();
-        orinoco.dataManager.saveCart(this.content);
-    }
-
-
-    /**
-     * [updateFromPagePanier description]
-     *
-     * @param   {[type]}  newCart  [newCart description]
-     *
-     * @return  {[type]}           [return description]
-     */
-    updateFromPagePanier(newCart) {
-        this.content = newCart;
-        this.render();
-    }
-
-}
 class Home {
 
     /**
      * Insert la page d'accueil 
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -225,9 +223,9 @@ class Home {
     /**
      * Récupère les données et affiche la page home dans le DOM
      *  
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {void}                     affiche dans le DOM
+     * @returns {HTMLElement}             Affiche dans le DOM
      */
     async getData(domTarget) {
         let content = "";
@@ -249,10 +247,12 @@ class Panier {
      * @type {Object}
      */
     fields = {}
+
+
     /**
      * Insert la page d'accueil 
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -263,11 +263,11 @@ class Panier {
 
 
     /**
-     * Récupère les données et affiche la page home dans le DOM
+     * Récupère le contenu du panier et le met sous forme d'objet
      *  
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {void}                     affiche dans le DOM
+     * 
      */
     async getData(domTarget) {
         let content = "";
@@ -279,11 +279,11 @@ class Panier {
 
 
     /**
-     * [render description]
+     * Affiche la page Panier
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
-     * @return  {void}             [Affiche dans le DOM le Panier]
+     * @return  {HTMLElement}             Affiche dans le DOM le Panier
      */
     render(domTarget) {
         let html = "";
@@ -294,11 +294,12 @@ class Panier {
             html += produit.showPanier();
             total += value.qte * value.price / 100;
         }
+        if (total === 0) return domTarget.innerHTML = this.templatePanierVide();
         domTarget.innerHTML = this.templatePanier(html, total);
     }
 
     /**
-     * [CartArrayToCartObject description]
+     * Transforme un array en objet
      *
      * @param   {Array}  content  la liste des produits
      *
@@ -321,12 +322,12 @@ class Panier {
 
 
     /**
-     * [Affiche la page panier]
+     * Affiche la page panier
      *
-     * @param   {[HTMLElement]}  contenuPanier  [Contenu du Panier]
-     * @param   {[HTMLElement]}  total          [Le Total]
+     * @param   {HTMLElement}  contenuPanier  Contenu du panier
+     * @param   {HTMLElement}  total          Prix total du panier
      *
-     * @return  {[void]}                 [Affiche dans le DOM]
+     * @return  {HTMLElement}                 Affiche dans le DOM
      */
     templatePanier(contenuPanier, total) {
 
@@ -335,7 +336,7 @@ class Panier {
 
             <div class="card_panier">
                 <div class="card_panier_titre">
-                    <h1> MON PANIER : </h1>
+                    <h1> VOTRE PANIER : </h1>
                 </div>           
                      ${contenuPanier}
                 <div class="card_panier_total">
@@ -386,10 +387,33 @@ class Panier {
                     `;
     }
 
+
     /**
-     * [Ajout une quantité d'un article donné]
+     * Affiche la page panier vide
      *
-     * @param   {id}  id  [ID de la caméra]
+     *
+     * @return  {HTMLElement}                 Affiche dans le DOM
+     */
+    templatePanierVide() {
+
+        return `
+        <div class="panier">
+
+            <div class="card_panier">
+                    <span class="card_panier-vide"> Votre panier est vide.</span>
+                    <div class="card_panier-retour" type="button" onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')">Retour à l'accueil</div>
+            </div>
+
+            
+
+         </div>
+                        `;
+    }
+
+    /**
+     * Ajout une quantité d'un article donné
+     *
+     * @param   {id}  id  ID de la caméra
      *
      */
     plus(id) {
@@ -398,10 +422,11 @@ class Panier {
     }
 
     /**
-     * [Retire une quantité d'un article donné]
+     * Retire une quantité d'un article donné
      *
-     * @param   {id}  id  [ID de la caméra]
+     * @param   {id}  id  ID de la caméra
      *
+     * 
      */
     moins(id) {
         if (this.products[id].qte === 0) return this.removeProduct(id);
@@ -410,9 +435,9 @@ class Panier {
     }
 
     /**
-     * [Met à jour le contenu du panier]
+     * Met à jour le contenu du panier
      *
-     * @return  {[type]}  [Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier]
+     * @return  {[type]}  Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier
      */
     updateCount() {
         const newCart = [];
@@ -428,9 +453,9 @@ class Panier {
 
 
     /**
-     * [Supprime un article donné]
+     * Supprime un article donné
      *
-     * @param   {id}  id  [ID de la caméra]
+     * @param   {id}  id  ID de la caméra
      *
      */
     removeProduct(id) {
@@ -440,11 +465,11 @@ class Panier {
 
 
     /**
-     * [Création d'un objet comprenant les données du formulaire + la liste des articles au format souhaité par l'API]
+     * Création d'un objet comprenant les données du formulaire + la liste des articles au format souhaité par l'API
      *
-     * @param   {Event}  event  [event description]
+     * @param   {Event}  event  formulaire
      *
-     * @return  {[type]}         [Affiche dans le DOM un modal du resultat de l'envoi]
+     * 
      */
     async sendForm(e) {
         e.stopPropagation();
@@ -477,11 +502,11 @@ class Panier {
     }
 
     /**
-     * [Affiche sous forme de modal le résultat de la requete]
+     * Affiche sous forme de modal le résultat de la requete
      *
-     * @param   {[Json]}  data  [Formulaire + Panier]
+     * @param   {Json}  data  Formulaire + Panier
      *
-     * @return  {[type]}        [Affiche dans le DOM]
+     * @return  {HTMLElement}        Affiche dans le DOM
      */
     async afficheModal(data) {
         let recap = "";
@@ -545,9 +570,9 @@ class Panier {
 
 
     /**
-     * [Permet de rendre visible le modal]
+     * Permet de rendre visible le modal
      *
-     * @return  {[type]}  [Affiche le Modal]
+     * @return  {[type]}  Affiche le Modal
      */
     optionModal() {
         let modal = document.getElementById("myModal");
@@ -555,11 +580,11 @@ class Panier {
     }
 
     /**
-     * [isValid description]
+     * Validation du formulaire avant envoi
      *
-     * @param   {HTMLElement}  input  [input description]
+     * @param   {HTMLElement}  input  Un élément input
      *
-     * @return  {[type]}         [return description]
+     * @return  {[HTMLElement]}         Affichage d'une erreur
      */
     isValid(input) {
 
@@ -676,27 +701,16 @@ class Panier {
         }
 
 
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Produit {
 
     /**
      * Récupère le domTarget et l'id de la caméra
      *
-     * @param   {HTMLElement}  domTarget  [Target de la page produit]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -707,12 +721,12 @@ class Produit {
     }
 
     /**
-     * [Affiche la page produit]
+     * Affiche la page produit
      *
-     * @param   {HTMLElement}  domTarget  [Target de la page produit]
-     * @param   {id}  productId  [id du produit demmandé]
+     * @param   {HTMLElement}  domTarget  Balise main
+     * @param   {id}  productId  id du produit demmandé
      *
-     * @return  {[type]}             [Affiche dans le DOM]
+     * @return  {HTMLElement}             Affiche dans le DOM
      */
     async getData(domTarget, productId) {
 
@@ -728,11 +742,11 @@ class Produit {
 
 
     /**
-     * [Donne les options pour le SELECT des caméras]
+     * Donne les options pour le SELECT des caméras
      *
-     * @param   {[id]}  nameSelect  [id de la caméra selectionné]
+     * @param   {id}  nameSelect           id de la caméra selectionné
      *
-     * @return  {[HTML]}              [Liste des options]
+     * @return  {HTMLElement}              Liste des options
      */
     async selectCamera(nameSelect) {
         let content = "";
@@ -752,9 +766,9 @@ class DataManager {
 
 
   /**
-   * [Récupère le lien de l'API]
+   * Récupère le lien de l'API
    *
-   * @param   {[link]}  src  [Lien de l'API]
+   * @param   {URL}  src  Lien de l'API
    *
    */
   constructor(src) {
@@ -762,9 +776,9 @@ class DataManager {
   }
 
   /**
-   * [Récupère tous les données de toutes les cameras]
+   * Récupère tous les données de toutes les cameras
    *
-   * @return  {[JSON]}  [JSON de toutes les cameras]
+   * @return  {JSON}  JSON de toutes les cameras
    */
   async getAllProducts() {
     const data = await fetch(this.src);
@@ -774,11 +788,11 @@ class DataManager {
   }
 
   /**
-   * [Récupère toutes les données d'une seule caméra]
+   * Récupère toutes les données d'une seule caméra
    *
-   * @param   {[id]}  productId  [ID d'une caméra]
+   * @param   {id}  productId  ID d'une caméra
    *
-   * @return  {[JSON]}             [JSON des données d'une caméra]
+   * @return  {JSON}             JSON des données d'une caméra
    */
   async getProduct(productId) {
     if (this.products !== null) return this.findInProducts(productId);
@@ -788,11 +802,11 @@ class DataManager {
   }
 
   /**
-   * [Envoi la validation du panier à l'API]
+   * Envoi la validation du panier à l'API
    *
-   * @param   {[Array]}  user  [Tableau comprenant la liste des articles ainsi que les ID des articles commandés]
+   * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
-   * @return  {[JSON]}        [Récap de la commande + numéro de commande]
+   * @return  {JSON}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
     const contact = JSON.stringify(user);
@@ -805,18 +819,17 @@ class DataManager {
       body: contact
     }
 
-    const data = await fetch(this.src+ "/order", option);
+    const data = await fetch(this.src + "/order", option);
     return await data.json();
   }
 
 
 
   /**
-   * [findInProducts description]
+   * Recherche dans 'products' si 'productId' existe
    *
-   * @param   {[type]}  productId  [productId description]
+   * @param   {id}  productId  Id de la caméra
    *
-   * @return  {[type]}             [return description]
    */
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
@@ -828,9 +841,9 @@ class DataManager {
 
 
   /**
-   * [Sauvegarde le panier dans le localStorage]
+   * Sauvegarde le panier dans le localStorage
    *
-   * @param   {[Array]}  cartContent  [Array comprenant les ID des cameras commandées]
+   * @param   {Array}  cartContent  Array comprenant les ID des cameras commandées
    *
    */
   saveCart(cartContent) {
@@ -838,9 +851,9 @@ class DataManager {
   }
 
   /**
-   * [Charge le panier à partir du localStorage]
+   * Charge le panier à partir du localStorage
    *
-   * @return  {[JSON]}  [Contenu du panier en JSON]
+   * @return  {JSON} Contenu du panier en JSON
    */
   reloadCart() {
     const content = localStorage.getItem("cart");
@@ -849,9 +862,9 @@ class DataManager {
   }
 
   /**
-   * [Vide le localStorage (Panier)]
+   * Vide le localStorage (Panier)
    *
-   * @return  {[type]}  [Cart localStorage vide + redirection page d'accueil]
+   * @return  {URL}  Cart localStorage vide + redirection page d'accueil
    */
   deletePanier() {
     localStorage.clear(Cart);
@@ -873,10 +886,12 @@ class PageManager {
    * @type {HTMLElement|null}
    */
   domTarget = null;
+
+
   /**
-   * [constructor description]
+   * constructor description
    *
-   * @param   {[HTMLElement}  domTarget  [domTarget description]
+   * @param   {HTMLElement}  domTarget  Balise main
    *
    */
   constructor(domTarget) {
@@ -887,11 +902,11 @@ class PageManager {
 
 
   /**
-   * [Affiche la page demandée]
+   * Affiche la page demandée
    *
-   * @param   {[URL]}  nom_url  [Nom de la page]
+   * @param   {URL}  nom_url  Nom de la page
    *
-   * @return  {[HTML]}           [Redirection vers la page demandée]
+   * @return  {HTML}           Redirection vers la page demandée
    */
   showPage(nom_url) {
 
@@ -903,12 +918,11 @@ class PageManager {
   }
 
   /**
-   * [Récupère le nom de la page demandée ainsi que son titre]
+   * Récupère le nom de la page demandée ainsi que son titre
    *
-   * @param   {[Text]}  newPage  [Nom de la page]
-   * @param   {[Text]}  title    [Titre de la page]
+   * @param   {Text}  newPage  Nom de la page
+   * @param   {Text}  title    Titre de la page
    *
-   * @return  {[type]}           [REnvoi vers showPage pour affiche la page]
    */
   changePage(newPage, title) {
     document.getElementById("menuCheck").checked = "none";
@@ -919,11 +933,11 @@ class PageManager {
   }
 }
 /**
- * [Récupère les données de l'API]
+ * Récupère les données de l'API
  *
- * @param   {URL}  http://localhost:3000/api/cameras  [Lien de l'API]
+ * @param   {URL}  http://localhost:3000/api/cameras    URL de l'API
  *
- * @return  {JSON}                                     [Retourne la liste des cameras vendu sur le site]
+ * @return  {JSON}                                     Retourne la liste des cameras vendu sur le site
  */
 
 /**

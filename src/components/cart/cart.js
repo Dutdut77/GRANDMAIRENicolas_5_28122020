@@ -3,9 +3,9 @@ class Cart {
     content = orinoco.dataManager.reloadCart();
 
     /**
-     * [Insert le nombre d'article dans le panier]
+     * Insert le nombre d'article dans le panier
      *
-     * @param   {[HTMLElement]}  domTarget  [cible]
+     * @param   {HTMLElement}  domTarget  .shopping_cart
      *
      */
     constructor(domTarget) {
@@ -15,9 +15,9 @@ class Cart {
     }
 
     /**
-     * [Actualise le nombre d'article dans le panier]
+     * Actualise le nombre d'article dans le panier
      *
-     * @return  {[number]}  [Nombre d'article dans le panier]
+     * @return  {number}  Nombre d'article dans le panier
      */
     render() {
 
@@ -31,11 +31,10 @@ class Cart {
 
 
     /**
-     * [Ajoute un article dans le panier]
+     * Ajoute un article dans le panier
      *
-     * @param   {[id]}  productId  [Id de la caméra ajoutée]
+     * @param   {id}  productId  Id de la caméra ajoutée
      *
-     * @return  {[type]}             [Nouveau rendu + actualisation du LocalStorage]
      */
     add(productId) {
         this.content.push(productId);
@@ -45,11 +44,10 @@ class Cart {
 
 
     /**
-     * [updateFromPagePanier description]
+     * Actualise le nombre d'article
      *
-     * @param   {[type]}  newCart  [newCart description]
+     * @param   {number}  newCart Nombre d'article dans le panier
      *
-     * @return  {[type]}           [return description]
      */
     updateFromPagePanier(newCart) {
         this.content = newCart;

@@ -5,9 +5,9 @@ class DataManager {
 
 
   /**
-   * [Récupère le lien de l'API]
+   * Récupère le lien de l'API
    *
-   * @param   {[link]}  src  [Lien de l'API]
+   * @param   {URL}  src  Lien de l'API
    *
    */
   constructor(src) {
@@ -15,9 +15,9 @@ class DataManager {
   }
 
   /**
-   * [Récupère tous les données de toutes les cameras]
+   * Récupère tous les données de toutes les cameras
    *
-   * @return  {[JSON]}  [JSON de toutes les cameras]
+   * @return  {JSON}  JSON de toutes les cameras
    */
   async getAllProducts() {
     const data = await fetch(this.src);
@@ -27,11 +27,11 @@ class DataManager {
   }
 
   /**
-   * [Récupère toutes les données d'une seule caméra]
+   * Récupère toutes les données d'une seule caméra
    *
-   * @param   {[id]}  productId  [ID d'une caméra]
+   * @param   {id}  productId  ID d'une caméra
    *
-   * @return  {[JSON]}             [JSON des données d'une caméra]
+   * @return  {JSON}             JSON des données d'une caméra
    */
   async getProduct(productId) {
     if (this.products !== null) return this.findInProducts(productId);
@@ -41,11 +41,11 @@ class DataManager {
   }
 
   /**
-   * [Envoi la validation du panier à l'API]
+   * Envoi la validation du panier à l'API
    *
-   * @param   {[Array]}  user  [Tableau comprenant la liste des articles ainsi que les ID des articles commandés]
+   * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
-   * @return  {[JSON]}        [Récap de la commande + numéro de commande]
+   * @return  {JSON}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
     const contact = JSON.stringify(user);
@@ -58,18 +58,17 @@ class DataManager {
       body: contact
     }
 
-    const data = await fetch(this.src+ "/order", option);
+    const data = await fetch(this.src + "/order", option);
     return await data.json();
   }
 
 
 
   /**
-   * [findInProducts description]
+   * Recherche dans 'products' si 'productId' existe
    *
-   * @param   {[type]}  productId  [productId description]
+   * @param   {id}  productId  Id de la caméra
    *
-   * @return  {[type]}             [return description]
    */
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
@@ -81,9 +80,9 @@ class DataManager {
 
 
   /**
-   * [Sauvegarde le panier dans le localStorage]
+   * Sauvegarde le panier dans le localStorage
    *
-   * @param   {[Array]}  cartContent  [Array comprenant les ID des cameras commandées]
+   * @param   {Array}  cartContent  Array comprenant les ID des cameras commandées
    *
    */
   saveCart(cartContent) {
@@ -91,9 +90,9 @@ class DataManager {
   }
 
   /**
-   * [Charge le panier à partir du localStorage]
+   * Charge le panier à partir du localStorage
    *
-   * @return  {[JSON]}  [Contenu du panier en JSON]
+   * @return  {JSON} Contenu du panier en JSON
    */
   reloadCart() {
     const content = localStorage.getItem("cart");
@@ -102,9 +101,9 @@ class DataManager {
   }
 
   /**
-   * [Vide le localStorage (Panier)]
+   * Vide le localStorage (Panier)
    *
-   * @return  {[type]}  [Cart localStorage vide + redirection page d'accueil]
+   * @return  {URL}  Cart localStorage vide + redirection page d'accueil
    */
   deletePanier() {
     localStorage.clear(Cart);

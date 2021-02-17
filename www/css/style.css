@@ -440,6 +440,32 @@ cart {
   margin-bottom: 15px;
   border-top: 2px solid #c9c9c9; }
 
+.card_panier-vide {
+  display: flex;
+  justify-content: center;
+  margin: 20px; }
+
+.card_panier-retour {
+  background-image: linear-gradient(to right, #7e8db1 0%, #5f729e 51%, #7a89aa 100%);
+  margin: 20px;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 10px #eee;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; }
+
+.card_panier-retour:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none; }
+
 .show_panier {
   display: flex;
   flex-wrap: nowrap;
@@ -583,7 +609,9 @@ cart {
   width: 100%; }
 
 .form-btn {
-  padding: 30px 20px 20px 20px; }
+  padding: 30px 20px 20px 20px;
+  display: flex;
+  justify-content: center; }
 
 .valid-btn {
   background-image: linear-gradient(to right, #7e8db1 0%, #5f729e 51%, #7a89aa 100%);
@@ -598,6 +626,7 @@ cart {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   cursor: pointer; }
 
 .valid-btn:hover {
@@ -608,7 +637,7 @@ cart {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 99;
   padding-top: 20px;
   left: 0;
   top: 0;
@@ -622,10 +651,13 @@ cart {
     margin: auto;
     padding: 0;
     border: 2px solid #5f729e;
-    width: 60%;
+    width: 90%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation-name: animatetop;
     animation-duration: 0.4s; }
+    @media (min-width: 1024px) {
+      .modal-content {
+        width: 60%; } }
   .modal-header {
     padding: 10px 10px 0 10px;
     background-color: #fff;

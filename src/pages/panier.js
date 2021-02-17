@@ -5,10 +5,12 @@ class Panier {
      * @type {Object}
      */
     fields = {}
+
+
     /**
      * Insert la page d'accueil 
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
      * @constructor
      */
@@ -19,11 +21,11 @@ class Panier {
 
 
     /**
-     * Récupère les données et affiche la page home dans le DOM
+     * Récupère le contenu du panier et le met sous forme d'objet
      *  
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {void}                     affiche dans le DOM
+     * 
      */
     async getData(domTarget) {
         let content = "";
@@ -35,11 +37,11 @@ class Panier {
 
 
     /**
-     * [render description]
+     * Affiche la page Panier
      *
-     * @param   {HTMLElement}  domTarget  [domTarget description]
+     * @param   {HTMLElement}  domTarget  Balise main
      *
-     * @return  {void}             [Affiche dans le DOM le Panier]
+     * @return  {HTMLElement}             Affiche dans le DOM le Panier
      */
     render(domTarget) {
         let html = "";
@@ -50,11 +52,12 @@ class Panier {
             html += produit.showPanier();
             total += value.qte * value.price / 100;
         }
+        if (total === 0) return domTarget.innerHTML = this.templatePanierVide();
         domTarget.innerHTML = this.templatePanier(html, total);
     }
 
     /**
-     * [CartArrayToCartObject description]
+     * Transforme un array en objet
      *
      * @param   {Array}  content  la liste des produits
      *
@@ -77,12 +80,12 @@ class Panier {
 
 
     /**
-     * [Affiche la page panier]
+     * Affiche la page panier
      *
-     * @param   {[HTMLElement]}  contenuPanier  [Contenu du Panier]
-     * @param   {[HTMLElement]}  total          [Le Total]
+     * @param   {HTMLElement}  contenuPanier  Contenu du panier
+     * @param   {HTMLElement}  total          Prix total du panier
      *
-     * @return  {[void]}                 [Affiche dans le DOM]
+     * @return  {HTMLElement}                 Affiche dans le DOM
      */
     templatePanier(contenuPanier, total) {
 
@@ -91,7 +94,7 @@ class Panier {
 
             <div class="card_panier">
                 <div class="card_panier_titre">
-                    <h1> MON PANIER : </h1>
+                    <h1> VOTRE PANIER : </h1>
                 </div>           
                      ${contenuPanier}
                 <div class="card_panier_total">
@@ -142,10 +145,33 @@ class Panier {
                     `;
     }
 
+
     /**
-     * [Ajout une quantité d'un article donné]
+     * Affiche la page panier vide
      *
-     * @param   {id}  id  [ID de la caméra]
+     *
+     * @return  {HTMLElement}                 Affiche dans le DOM
+     */
+    templatePanierVide() {
+
+        return `
+        <div class="panier">
+
+            <div class="card_panier">
+                    <span class="card_panier-vide"> Votre panier est vide.</span>
+                    <div class="card_panier-retour" type="button" onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')">Retour à l'accueil</div>
+            </div>
+
+            
+
+         </div>
+                        `;
+    }
+
+    /**
+     * Ajout une quantité d'un article donné
+     *
+     * @param   {id}  id  ID de la caméra
      *
      */
     plus(id) {
@@ -154,10 +180,11 @@ class Panier {
     }
 
     /**
-     * [Retire une quantité d'un article donné]
+     * Retire une quantité d'un article donné
      *
-     * @param   {id}  id  [ID de la caméra]
+     * @param   {id}  id  ID de la caméra
      *
+     * 
      */
     moins(id) {
         if (this.products[id].qte === 0) return this.removeProduct(id);
@@ -166,9 +193,9 @@ class Panier {
     }
 
     /**
-     * [Met à jour le contenu du panier]
+     * Met à jour le contenu du panier
      *
-     * @return  {[type]}  [Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier]
+     * @return  {[type]}  Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier
      */
     updateCount() {
         const newCart = [];
@@ -184,9 +211,9 @@ class Panier {
 
 
     /**
-     * [Supprime un article donné]
+     * Supprime un article donné
      *
-     * @param   {id}  id  [ID de la caméra]
+     * @param   {id}  id  ID de la caméra
      *
      */
     removeProduct(id) {
@@ -196,11 +223,11 @@ class Panier {
 
 
     /**
-     * [Création d'un objet comprenant les données du formulaire + la liste des articles au format souhaité par l'API]
+     * Création d'un objet comprenant les données du formulaire + la liste des articles au format souhaité par l'API
      *
-     * @param   {Event}  event  [event description]
+     * @param   {Event}  event  formulaire
      *
-     * @return  {[type]}         [Affiche dans le DOM un modal du resultat de l'envoi]
+     * 
      */
     async sendForm(e) {
         e.stopPropagation();
@@ -233,11 +260,11 @@ class Panier {
     }
 
     /**
-     * [Affiche sous forme de modal le résultat de la requete]
+     * Affiche sous forme de modal le résultat de la requete
      *
-     * @param   {[Json]}  data  [Formulaire + Panier]
+     * @param   {Json}  data  Formulaire + Panier
      *
-     * @return  {[type]}        [Affiche dans le DOM]
+     * @return  {HTMLElement}        Affiche dans le DOM
      */
     async afficheModal(data) {
         let recap = "";
@@ -301,9 +328,9 @@ class Panier {
 
 
     /**
-     * [Permet de rendre visible le modal]
+     * Permet de rendre visible le modal
      *
-     * @return  {[type]}  [Affiche le Modal]
+     * @return  {[type]}  Affiche le Modal
      */
     optionModal() {
         let modal = document.getElementById("myModal");
@@ -311,11 +338,11 @@ class Panier {
     }
 
     /**
-     * [isValid description]
+     * Validation du formulaire avant envoi
      *
-     * @param   {HTMLElement}  input  [input description]
+     * @param   {HTMLElement}  input  Un élément input
      *
-     * @return  {[type]}         [return description]
+     * @return  {[HTMLElement]}         Affichage d'une erreur
      */
     isValid(input) {
 
@@ -432,17 +459,7 @@ class Panier {
         }
 
 
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

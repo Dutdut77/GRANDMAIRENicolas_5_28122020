@@ -1,9 +1,9 @@
 /**
- * [Récupère les données de l'API]
+ * Récupère les données de l'API
  *
- * @param   {URL}  http://localhost:3000/api/cameras  [Lien de l'API]
+ * @param   {URL}  http://localhost:3000/api/cameras    URL de l'API
  *
- * @return  {JSON}                                     [Retourne la liste des cameras vendu sur le site]
+ * @return  {JSON}                                     Retourne la liste des cameras vendu sur le site
  */
 
 /**
