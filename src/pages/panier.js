@@ -41,7 +41,7 @@ class Panier {
      *
      * @param   {HTMLElement}  domTarget  Balise main
      *
-     * @return  {HTMLElement}             Affiche dans le DOM le Panier
+     * @return  {void}             Affiche dans le DOM le Panier
      */
     render(domTarget) {
         let html = "";
@@ -85,7 +85,7 @@ class Panier {
      * @param   {HTMLElement}  contenuPanier  Contenu du panier
      * @param   {HTMLElement}  total          Prix total du panier
      *
-     * @return  {HTMLElement}                 Affiche dans le DOM
+     *  @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
     templatePanier(contenuPanier, total) {
 

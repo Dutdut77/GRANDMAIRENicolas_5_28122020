@@ -1,3 +1,4 @@
+/* global Article orinoco*/
 class Produit {
 
     /**
@@ -16,10 +17,10 @@ class Produit {
     /**
      * Affiche la page produit
      *
-     * @param   {HTMLElement}  domTarget  Balise main
-     * @param   {id}  productId  id du produit demmandé
+     * @param   {HTMLElement}  domTarget    Balise main
+     * @param   {id}  productId             id du produit demmandé
      *
-     * @return  {HTMLElement}             Affiche dans le DOM
+     * @return  {HTMLElement}               Affiche dans le DOM
      */
     async getData(domTarget, productId) {
 
@@ -39,14 +40,14 @@ class Produit {
      *
      * @param   {id}  nameSelect           id de la caméra selectionné
      *
-     * @return  {HTMLElement}              Liste des options
+     * @return  {String}                   Liste des options en HTML
      */
     async selectCamera(nameSelect) {
         let content = "";
-        let listeName = "";
+        //let listeName = "";
         const name = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = name.length; i < size; i++) {
-            content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`
+            content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`;
         }
         return content;
 

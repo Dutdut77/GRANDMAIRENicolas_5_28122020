@@ -34,32 +34,46 @@ class DataManager {
    * @return  {JSON}             JSON des données d'une caméra
    */
   async getProduct(productId) {
-    if (this.products !== null) return this.findInProducts(productId);
-    const data = await fetch(this.src + "/" + productId);
-    return await data.json();
+    try{
+      if (this.products !== null) return this.findInProducts(productId);
+      const data = await fetch(this.src + "/" + productId);
+      return await data.json();
+    }
+    catch(err){
+      console.error(err);
+      alert("nous un souci technique");
+    }
+
 
   }
 
   /**
-   * Envoi la validation du panier à l'API
+   * Envoi la validation du panier vers l'API
    *
    * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
    * @return  {JSON}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
-    const contact = JSON.stringify(user);
-    const option = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: contact
-    }
+    try{
+      const contact = JSON.stringify(user);
+      const option = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: contact
+      }
+  
+      const data = await fetch(this.src + "/order", option);
+      return await data.json();
 
-    const data = await fetch(this.src + "/order", option);
-    return await data.json();
+    }
+    catch(err){
+      console.error(err);
+      alert("souci technique");
+    }
   }
 
 
@@ -67,7 +81,7 @@ class DataManager {
   /**
    * Recherche dans 'products' si 'productId' existe
    *
-   * @param   {id}  productId  Id de la caméra
+   * @param   {String}  productId  Id de la caméra
    *
    */
   findInProducts(productId) {
@@ -92,7 +106,7 @@ class DataManager {
   /**
    * Charge le panier à partir du localStorage
    *
-   * @return  {JSON} Contenu du panier en JSON
+   * @return  {Object}  Contenu du panier en JSON
    */
   reloadCart() {
     const content = localStorage.getItem("cart");
@@ -103,7 +117,7 @@ class DataManager {
   /**
    * Vide le localStorage (Panier)
    *
-   * @return  {URL}  Cart localStorage vide + redirection page d'accueil
+   * @return  {void}  Cart localStorage vide + redirection page d'accueil
    */
   deletePanier() {
     localStorage.clear(Cart);

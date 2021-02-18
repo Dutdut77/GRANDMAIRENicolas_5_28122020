@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/Dutdut77/GRANDMAIRENicolas_5_28122020#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.13",
+    "browser-sync": "^2.26.14",
+    "eslint": "^7.20.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.3.0",

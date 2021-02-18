@@ -7,6 +7,7 @@ class Cart {
      *
      * @param   {HTMLElement}  domTarget  .shopping_cart
      *
+     * @constructor
      */
     constructor(domTarget) {
         this.DOM = document.createElement("cart");
@@ -17,7 +18,7 @@ class Cart {
     /**
      * Actualise le nombre d'article dans le panier
      *
-     * @return  {number}  Nombre d'article dans le panier
+     * @return  {void}  Nombre d'article dans le panier
      */
     render() {
 
@@ -44,9 +45,11 @@ class Cart {
 
 
     /**
-     * Actualise le nombre d'article
+     * Met à jour le contenu du panier et actualise le rendu
      *
-     * @param   {number}  newCart Nombre d'article dans le panier
+     * @param   {Number}  newCart Nombre d'article dans le panier
+     * 
+     * @return  {void}
      *
      */
     updateFromPagePanier(newCart) {

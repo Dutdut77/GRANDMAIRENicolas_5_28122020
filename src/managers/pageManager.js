@@ -29,9 +29,9 @@ class PageManager {
   /**
    * Affiche la page demandée
    *
-   * @param   {URL}  nom_url  Nom de la page
+   * @param   {String}  nom_url  Nom de la page
    *
-   * @return  {HTML}           Redirection vers la page demandée
+   * @return  {void}           Redirection vers la page demandée
    */
   showPage(nom_url) {
 
@@ -45,8 +45,8 @@ class PageManager {
   /**
    * Récupère le nom de la page demandée ainsi que son titre
    *
-   * @param   {Text}  newPage  Nom de la page
-   * @param   {Text}  title    Titre de la page
+   * @param   {String}  newPage  Nom de la page
+   * @param   {String}  title    Titre de la page
    *
    */
   changePage(newPage, title) {

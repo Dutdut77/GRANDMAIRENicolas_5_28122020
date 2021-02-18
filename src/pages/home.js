@@ -1,3 +1,4 @@
+/* global Article orinoco*/
 class Home {
 
     /**
@@ -17,7 +18,7 @@ class Home {
      *  
      * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {HTMLElement}             Affiche dans le DOM
+     * @returns {void}             Affiche dans le DOM
      */
     async getData(domTarget) {
         let content = "";
@@ -30,4 +31,3 @@ class Home {
         domTarget.innerHTML = content;
     }
 }
-

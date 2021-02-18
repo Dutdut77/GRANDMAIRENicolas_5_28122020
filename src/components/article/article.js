@@ -10,11 +10,14 @@ class Article {
     /**
      * Transforme le JSON en Tableau
      *
-     * @param   {JSON}  specs  JSON de l'API
+     * @param   {JSON}    specs       JSON de l'API
+     * @param   {String}  specs._id   l'id produit
+     * @param   {Array}   specs.lens  les variantes du produits
      *
-     * @return  {object}       JSON transformer en object
+     * @constructor
      */
     constructor(specs) {
+        specs.lens
         for (const [key, value] of Object.entries(specs)) {
             this[key] = value;
         }
@@ -24,7 +27,7 @@ class Article {
     /**
      * Affiche les cameras sur la page d'accueil
      *
-     * @return  {HTMLElement}  Affiche dans le DOM
+     * @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
     afficheResume() {
         return `
@@ -141,11 +144,9 @@ class Article {
     /**
      * Fonction pour changer de page vers la page produit
      *
-     * @return  {URL}  Redirection vers produits.js
+     * @return  {void}  Redirection vers produits.js
      */
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }
-
-
 }
