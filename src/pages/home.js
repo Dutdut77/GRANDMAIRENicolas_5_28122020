@@ -28,9 +28,6 @@ class Home {
             orinoco.components["composant_" + products[i]._id] = new Article(products[i]);
             content += orinoco.components["composant_" + products[i]._id].afficheResume();
         }
-        domTarget.innerHTML = `
-        <div class="titre"><h1>-- Les argentiques -- </h1></div>
-        ${content}
-        `;
+        domTarget.innerHTML = content;
     }
 }

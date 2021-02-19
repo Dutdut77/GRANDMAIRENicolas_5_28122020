@@ -35,7 +35,7 @@ class Article {
             <div class="card__list-image" style="background-image: url('${this.imageUrl}');"></div>
             <div class="card__list-content">
                 <div class="card__content-titre">
-                    <h2>${this.name}</h2>
+                    <h1>${this.name}</h1>
                 </div>
                 <div class="card__content-desc">
                 ${this.description}  
@@ -63,7 +63,7 @@ class Article {
             
             <div class="produit-content">
                 <div class="produit-titre">
-                    <h2>${this.name}</h2>
+                    <h1>${this.name}</h1>
                 </div>
                 <div class="produit-prix">
                      ${this.price / 100} € 

@@ -27,9 +27,9 @@ class Produit {
         const specs = await orinoco.dataManager.getProduct(productId);
         const produit = new Article(specs);
         domTarget.innerHTML = `
-        <label for="camera" class="titre"><h1>-- ${produit.name} -- </h1></label>
+        
           <select name="camera" class="camera" id="camera" onchange="orinoco.pageManager.changePage('produit_' + this.value, 'Oricono - Camera '+this.options[this.selectedIndex].text)">        
-              ${await this.selectCamera(produit.name)}
+                ${await this.selectCamera(produit.name)}
           </select>
           ${produit.afficheDetails()}
         `;

@@ -95,7 +95,7 @@ class Article {
             <div class="card__list-image" style="background-image: url('${this.imageUrl}');"></div>
             <div class="card__list-content">
                 <div class="card__content-titre">
-                    <h2>${this.name}</h2>
+                    <h1>${this.name}</h1>
                 </div>
                 <div class="card__content-desc">
                 ${this.description}  
@@ -123,7 +123,7 @@ class Article {
             
             <div class="produit-content">
                 <div class="produit-titre">
-                    <h2>${this.name}</h2>
+                    <h1>${this.name}</h1>
                 </div>
                 <div class="produit-prix">
                      ${this.price / 100} € 
@@ -240,10 +240,7 @@ class Home {
             orinoco.components["composant_" + products[i]._id] = new Article(products[i]);
             content += orinoco.components["composant_" + products[i]._id].afficheResume();
         }
-        domTarget.innerHTML = `
-        <div class="titre"><h1>-- Les argentiques -- </h1></div>
-        ${content}
-        `;
+        domTarget.innerHTML = content;
     }
 }
 class Panier {
@@ -740,9 +737,9 @@ class Produit {
         const specs = await orinoco.dataManager.getProduct(productId);
         const produit = new Article(specs);
         domTarget.innerHTML = `
-        <label for="camera" class="titre"><h1>-- ${produit.name} -- </h1></label>
+        
           <select name="camera" class="camera" id="camera" onchange="orinoco.pageManager.changePage('produit_' + this.value, 'Oricono - Camera '+this.options[this.selectedIndex].text)">        
-              ${await this.selectCamera(produit.name)}
+                ${await this.selectCamera(produit.name)}
           </select>
           ${produit.afficheDetails()}
         `;
