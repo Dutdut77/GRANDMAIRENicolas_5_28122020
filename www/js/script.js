@@ -1,3 +1,63 @@
+class Cart {
+
+    content = orinoco.dataManager.reloadCart();
+
+    /**
+     * Insert le nombre d'article dans le panier
+     *
+     * @param   {HTMLElement}  domTarget  .shopping_cart
+     *
+     * @constructor
+     */
+    constructor(domTarget) {
+        this.DOM = document.createElement("cart");
+        this.domTarget = domTarget;
+        this.render();
+    }
+
+    /**
+     * Actualise le nombre d'article dans le panier
+     *
+     * @return  {void}  Nombre d'article dans le panier
+     */
+    render() {
+
+        if (this.content.length > 0) {
+            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
+            this.DOM.innerText = this.content.length;
+            return;
+        }
+        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
+    }
+
+
+    /**
+     * Ajoute un article dans le panier
+     *
+     * @param   {id}  productId  Id de la caméra ajoutée
+     *
+     */
+    add(productId) {
+        this.content.push(productId);
+        this.render();
+        orinoco.dataManager.saveCart(this.content);
+    }
+
+
+    /**
+     * Met à jour le contenu du panier et actualise le rendu
+     *
+     * @param   {Number}  newCart Nombre d'article dans le panier
+     * 
+     * @return  {void}
+     *
+     */
+    updateFromPagePanier(newCart) {
+        this.content = newCart;
+        this.render();
+    }
+
+}
 class Article {
 
     description;
@@ -149,66 +209,6 @@ class Article {
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }
-}
-class Cart {
-
-    content = orinoco.dataManager.reloadCart();
-
-    /**
-     * Insert le nombre d'article dans le panier
-     *
-     * @param   {HTMLElement}  domTarget  .shopping_cart
-     *
-     * @constructor
-     */
-    constructor(domTarget) {
-        this.DOM = document.createElement("cart");
-        this.domTarget = domTarget;
-        this.render();
-    }
-
-    /**
-     * Actualise le nombre d'article dans le panier
-     *
-     * @return  {void}  Nombre d'article dans le panier
-     */
-    render() {
-
-        if (this.content.length > 0) {
-            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
-            this.DOM.innerText = this.content.length;
-            return;
-        }
-        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
-    }
-
-
-    /**
-     * Ajoute un article dans le panier
-     *
-     * @param   {id}  productId  Id de la caméra ajoutée
-     *
-     */
-    add(productId) {
-        this.content.push(productId);
-        this.render();
-        orinoco.dataManager.saveCart(this.content);
-    }
-
-
-    /**
-     * Met à jour le contenu du panier et actualise le rendu
-     *
-     * @param   {Number}  newCart Nombre d'article dans le panier
-     * 
-     * @return  {void}
-     *
-     */
-    updateFromPagePanier(newCart) {
-        this.content = newCart;
-        this.render();
-    }
-
 }
 /* global Article orinoco*/
 class Home {
@@ -931,7 +931,7 @@ class PageManager {
    * @return  {void}           Redirection vers la page demandée
    */
   showPage(nom_url) {
-
+    document.getElementById("menuCheck").checked = "none";
     if (nom_url === "") return this.page = new Home(this.domTarget);
     if (nom_url === "panier") return this.page = new Panier(this.domTarget);
     if (nom_url.slice(0, 7) === "produit") return this.page = new Produit(this.domTarget, nom_url.slice(8));
@@ -947,7 +947,7 @@ class PageManager {
    *
    */
   changePage(newPage, title) {
-    document.getElementById("menuCheck").checked = "none";
+    
     document.title = title;
     history.pushState({}, title, "?" + newPage);
     this.showPage(newPage);

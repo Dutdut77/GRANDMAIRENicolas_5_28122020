@@ -54,7 +54,9 @@ header {
 
 .text-menu {
   font-size: 12px;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center;
+  margin-top: -15px; }
 
 .menu-list {
   position: fixed;
