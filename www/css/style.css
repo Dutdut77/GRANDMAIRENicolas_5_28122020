@@ -55,8 +55,7 @@ header {
 .text-menu {
   font-size: 12px;
   font-weight: bold;
-  text-align: center;
-  margin-top: -15px; }
+  text-align: center; }
 
 .menu-list {
   position: fixed;
