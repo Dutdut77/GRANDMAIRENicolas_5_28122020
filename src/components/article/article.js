@@ -30,19 +30,19 @@ class Article {
      * @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
     afficheResume() {
-        return `
+        return `     
         <div class="card">
             <div class="card__list-image" style="background-image: url('${this.imageUrl}');"></div>
             <div class="card__list-content">
                 <div class="card__content-titre">
-                    <h3>${this.name}</h3>
+                    <h2>${this.name}</h2>
                 </div>
                 <div class="card__content-desc">
                 ${this.description}  
                 </div>
             </div>
             <div class="card__list_bouton">
-                <div class="card__btn btn-grad-color" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
+                <button class="card__btn btn-grad-color" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</button>
             </div>
         </div>
              `;
@@ -63,7 +63,7 @@ class Article {
             
             <div class="produit-content">
                 <div class="produit-titre">
-                    <h3>${this.name}</h3>
+                    <h2>${this.name}</h2>
                 </div>
                 <div class="produit-prix">
                      ${this.price / 100} € 
@@ -74,15 +74,15 @@ class Article {
                 <article>
                 ${this.description}
                 </article>             
-            </div>     
-            
-            <select name="lenses" class="lenses">
-                <option value="">Choisissez une option :</option>
+            </div>  
+
+            <label for="lenses" class="lenses-label">Choisissez une option :</label>
+            <select name="lenses" id="lenses" class="lenses">
                 ${this.showVariants(this.lenses)}      
             </select>
             
             <div class="produit-bouton">
-                <div class="produit-btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
+                <button class="produit-btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</button>
             </div>
 
         </div>
@@ -103,21 +103,21 @@ class Article {
           
        <div class="panier_content">
           <div class="panier_content_titre">
-              <h4>${this.name}</h4>
+              <h2>${this.name}</h2>
           </div>
           <div class="panier_content_quantite">
               <div class="quantite_titre">Quantité :</div>
               <div class="quantite_box"> 
-                  <div class="quantite_box_moins" onclick="orinoco.pageManager.page.moins('${this._id}')"></div>
+                  <button class="quantite_box_moins" onclick="orinoco.pageManager.page.moins('${this._id}')">-</button>
                   <div class="quantite_box_nombre">${this.qte}</div>
-                   <div class="quantite_box_plus" onclick="orinoco.pageManager.page.plus('${this._id}')"></div>
+                   <button class="quantite_box_plus" onclick="orinoco.pageManager.page.plus('${this._id}')">+</button>
               </div>    
           </div>   
       </div>
   
       <div class="panier_price">
           <div class="corbeille" onclick="orinoco.pageManager.page.removeProduct('${this._id}')"></div>
-          <h4>${this.price / 100 * this.qte}€</h4> 
+          <h2>${this.price / 100 * this.qte}€</h2> 
       </div> 
 
   </div>

@@ -6,7 +6,6 @@ header {
   height: 60px;
   background-color: white;
   width: 100%;
-
 }
 
 .logo {
@@ -35,12 +34,21 @@ header {
   width: 0;
   height: 0;
   display: none;
-  }
+}
+
 
 .menu-icon {
   color: black;
   position: relative;
   z-index: 20;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-menu {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top : px;
 }
 
 .menu-list {
@@ -64,17 +72,16 @@ header {
   transform: translate(-100%, -100%);
 }
 
-.menu-list li {
+.menu-list li button {
   text-transform: uppercase;
   font-size: 1.5em;
   letter-spacing: 2px;
   margin-bottom: 40px;
   opacity: 1;
   transition: opacity 1s;
-
 }
 
-.menu-list li::after {
+.menu-list li button::after {
   content: "";
   display: block;
   width: 0;
@@ -84,7 +91,7 @@ header {
   transition: 0.3s ease;
   background: black;
 }
-.menu-list li:hover::after {
+.menu-list li button:hover::after {
   width: 120%;
 }
 

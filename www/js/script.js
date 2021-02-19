@@ -13,13 +13,11 @@ class Article {
      * @param   {JSON}    specs       JSON de l'API
      * @param   {String}  specs._id   l'id produit
      * @param   {Array}   specs.lens  les variantes du produits
-     * @param   {Boolean}  [specs.bidule] gdgdfgdfgdfg
-     * 
      *
-     * @return  {object}              JSON transformer en object
+     * @constructor
      */
     constructor(specs) {
-        // specs.l
+        specs.lens
         for (const [key, value] of Object.entries(specs)) {
             this[key] = value;
         }
@@ -29,22 +27,22 @@ class Article {
     /**
      * Affiche les cameras sur la page d'accueil
      *
-     * @return  {HTMLElement}  Affiche dans le DOM
+     * @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
     afficheResume() {
-        return `
+        return `     
         <div class="card">
             <div class="card__list-image" style="background-image: url('${this.imageUrl}');"></div>
             <div class="card__list-content">
                 <div class="card__content-titre">
-                    <h3>${this.name}</h3>
+                    <h2>${this.name}</h2>
                 </div>
                 <div class="card__content-desc">
                 ${this.description}  
                 </div>
             </div>
             <div class="card__list_bouton">
-                <div class="card__btn btn-grad-color" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</div>
+                <button class="card__btn btn-grad-color" onclick="orinoco.components.composant_${this._id}.changePage()">Détail</button>
             </div>
         </div>
              `;
@@ -65,7 +63,7 @@ class Article {
             
             <div class="produit-content">
                 <div class="produit-titre">
-                    <h3>${this.name}</h3>
+                    <h2>${this.name}</h2>
                 </div>
                 <div class="produit-prix">
                      ${this.price / 100} € 
@@ -76,15 +74,15 @@ class Article {
                 <article>
                 ${this.description}
                 </article>             
-            </div>     
-            
-            <select name="lenses" class="lenses">
-                <option value="">Choisissez une option :</option>
+            </div>  
+
+            <label for="lenses" class="lenses-label">Choisissez une option :</label>
+            <select name="lenses" id="lenses" class="lenses">
                 ${this.showVariants(this.lenses)}      
             </select>
             
             <div class="produit-bouton">
-                <div class="produit-btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</div>
+                <button class="produit-btn" onclick="orinoco.cart.add('${this._id}')">Ajouter au Panier</button>
             </div>
 
         </div>
@@ -105,21 +103,21 @@ class Article {
           
        <div class="panier_content">
           <div class="panier_content_titre">
-              <h4>${this.name}</h4>
+              <h2>${this.name}</h2>
           </div>
           <div class="panier_content_quantite">
               <div class="quantite_titre">Quantité :</div>
               <div class="quantite_box"> 
-                  <div class="quantite_box_moins" onclick="orinoco.pageManager.page.moins('${this._id}')"></div>
+                  <button class="quantite_box_moins" onclick="orinoco.pageManager.page.moins('${this._id}')">-</button>
                   <div class="quantite_box_nombre">${this.qte}</div>
-                   <div class="quantite_box_plus" onclick="orinoco.pageManager.page.plus('${this._id}')"></div>
+                   <button class="quantite_box_plus" onclick="orinoco.pageManager.page.plus('${this._id}')">+</button>
               </div>    
           </div>   
       </div>
   
       <div class="panier_price">
           <div class="corbeille" onclick="orinoco.pageManager.page.removeProduct('${this._id}')"></div>
-          <h4>${this.price / 100 * this.qte}€</h4> 
+          <h2>${this.price / 100 * this.qte}€</h2> 
       </div> 
 
   </div>
@@ -146,13 +144,11 @@ class Article {
     /**
      * Fonction pour changer de page vers la page produit
      *
-     * @return  {URL}  Redirection vers produits.js
+     * @return  {void}  Redirection vers produits.js
      */
     changePage() {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }
-
-
 }
 class Cart {
 
@@ -163,6 +159,7 @@ class Cart {
      *
      * @param   {HTMLElement}  domTarget  .shopping_cart
      *
+     * @constructor
      */
     constructor(domTarget) {
         this.DOM = document.createElement("cart");
@@ -173,7 +170,7 @@ class Cart {
     /**
      * Actualise le nombre d'article dans le panier
      *
-     * @return  {number}  Nombre d'article dans le panier
+     * @return  {void}  Nombre d'article dans le panier
      */
     render() {
 
@@ -200,9 +197,11 @@ class Cart {
 
 
     /**
-     * Actualise le nombre d'article
+     * Met à jour le contenu du panier et actualise le rendu
      *
-     * @param   {number}  newCart Nombre d'article dans le panier
+     * @param   {Number}  newCart Nombre d'article dans le panier
+     * 
+     * @return  {void}
      *
      */
     updateFromPagePanier(newCart) {
@@ -211,6 +210,7 @@ class Cart {
     }
 
 }
+/* global Article orinoco*/
 class Home {
 
     /**
@@ -230,7 +230,7 @@ class Home {
      *  
      * @param   {HTMLElement}  domTarget  Balise main
      * 
-     * @returns {HTMLElement}             Affiche dans le DOM
+     * @returns {void}             Affiche dans le DOM
      */
     async getData(domTarget) {
         let content = "";
@@ -240,11 +240,12 @@ class Home {
             orinoco.components["composant_" + products[i]._id] = new Article(products[i]);
             content += orinoco.components["composant_" + products[i]._id].afficheResume();
         }
-        domTarget.innerHTML = content;
+        domTarget.innerHTML = `
+        <div class="titre"><h1>-- Les argentiques -- </h1></div>
+        ${content}
+        `;
     }
 }
-
-
 class Panier {
 
     /**
@@ -288,7 +289,7 @@ class Panier {
      *
      * @param   {HTMLElement}  domTarget  Balise main
      *
-     * @return  {HTMLElement}             Affiche dans le DOM le Panier
+     * @return  {void}             Affiche dans le DOM le Panier
      */
     render(domTarget) {
         let html = "";
@@ -332,7 +333,7 @@ class Panier {
      * @param   {HTMLElement}  contenuPanier  Contenu du panier
      * @param   {HTMLElement}  total          Prix total du panier
      *
-     * @return  {HTMLElement}                 Affiche dans le DOM
+     *  @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
     templatePanier(contenuPanier, total) {
 
@@ -564,7 +565,7 @@ class Panier {
             </div>
 
             <div class="modal-footer">  
-                <div class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</div>
+                <button class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</button>
             </div>
         </div>
         `;
@@ -710,6 +711,7 @@ class Panier {
 
 
 }
+/* global Article orinoco*/
 class Produit {
 
     /**
@@ -728,37 +730,38 @@ class Produit {
     /**
      * Affiche la page produit
      *
-     * @param   {HTMLElement}  domTarget  Balise main
-     * @param   {id}  productId  id du produit demmandé
+     * @param   {HTMLElement}  domTarget    Balise main
+     * @param   {id}  productId             id du produit demmandé
      *
-     * @return  {HTMLElement}             Affiche dans le DOM
+     * @return  {HTMLElement}               Affiche dans le DOM
      */
     async getData(domTarget, productId) {
 
         const specs = await orinoco.dataManager.getProduct(productId);
         const produit = new Article(specs);
         domTarget.innerHTML = `
-          <select name="camera" class="camera" onchange="orinoco.pageManager.changePage('produit_' + this.value, 'Oricono - Camera '+this.options[this.selectedIndex].text)">        
+        <label for="camera" class="titre"><h1>-- ${produit.name} -- </h1></label>
+          <select name="camera" class="camera" id="camera" onchange="orinoco.pageManager.changePage('produit_' + this.value, 'Oricono - Camera '+this.options[this.selectedIndex].text)">        
               ${await this.selectCamera(produit.name)}
           </select>
           ${produit.afficheDetails()}
         `;
     }
-
+  
 
     /**
      * Donne les options pour le SELECT des caméras
      *
      * @param   {id}  nameSelect           id de la caméra selectionné
      *
-     * @return  {HTMLElement}              Liste des options
+     * @return  {String}                   Liste des options en HTML
      */
     async selectCamera(nameSelect) {
         let content = "";
-        let listeName = "";
+        //let listeName = "";
         const name = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = name.length; i < size; i++) {
-            content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`
+            content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`;
         }
         return content;
 
@@ -800,32 +803,46 @@ class DataManager {
    * @return  {JSON}             JSON des données d'une caméra
    */
   async getProduct(productId) {
-    if (this.products !== null) return this.findInProducts(productId);
-    const data = await fetch(this.src + "/" + productId);
-    return await data.json();
+    try{
+      if (this.products !== null) return this.findInProducts(productId);
+      const data = await fetch(this.src + "/" + productId);
+      return await data.json();
+    }
+    catch(err){
+      console.error(err);
+      alert("nous un souci technique");
+    }
+
 
   }
 
   /**
-   * Envoi la validation du panier à l'API
+   * Envoi la validation du panier vers l'API
    *
    * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
    * @return  {JSON}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
-    const contact = JSON.stringify(user);
-    const option = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: contact
-    }
+    try{
+      const contact = JSON.stringify(user);
+      const option = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: contact
+      }
+  
+      const data = await fetch(this.src + "/order", option);
+      return await data.json();
 
-    const data = await fetch(this.src + "/order", option);
-    return await data.json();
+    }
+    catch(err){
+      console.error(err);
+      alert("souci technique");
+    }
   }
 
 
@@ -833,7 +850,7 @@ class DataManager {
   /**
    * Recherche dans 'products' si 'productId' existe
    *
-   * @param   {id}  productId  Id de la caméra
+   * @param   {String}  productId  Id de la caméra
    *
    */
   findInProducts(productId) {
@@ -858,7 +875,7 @@ class DataManager {
   /**
    * Charge le panier à partir du localStorage
    *
-   * @return  {JSON} Contenu du panier en JSON
+   * @return  {Object}  Contenu du panier en JSON
    */
   reloadCart() {
     const content = localStorage.getItem("cart");
@@ -869,7 +886,7 @@ class DataManager {
   /**
    * Vide le localStorage (Panier)
    *
-   * @return  {URL}  Cart localStorage vide + redirection page d'accueil
+   * @return  {void}  Cart localStorage vide + redirection page d'accueil
    */
   deletePanier() {
     localStorage.clear(Cart);
@@ -909,9 +926,9 @@ class PageManager {
   /**
    * Affiche la page demandée
    *
-   * @param   {URL}  nom_url  Nom de la page
+   * @param   {String}  nom_url  Nom de la page
    *
-   * @return  {HTML}           Redirection vers la page demandée
+   * @return  {void}           Redirection vers la page demandée
    */
   showPage(nom_url) {
 
@@ -925,8 +942,8 @@ class PageManager {
   /**
    * Récupère le nom de la page demandée ainsi que son titre
    *
-   * @param   {Text}  newPage  Nom de la page
-   * @param   {Text}  title    Titre de la page
+   * @param   {String}  newPage  Nom de la page
+   * @param   {String}  title    Titre de la page
    *
    */
   changePage(newPage, title) {
@@ -937,23 +954,20 @@ class PageManager {
 
   }
 }
-/**
- * Récupère les données de l'API
- *
- * @param   {URL}  http://localhost:3000/api/cameras    URL de l'API
- *
- * @return  {JSON}                                     Retourne la liste des cameras vendu sur le site
- */
+/* global Cart PageManager DataManager*/
+
 
 /**
  * objet regroupant tous les éléments du site
  *
  * @type {Object}
+ * 
  */
+
 const orinoco = {
     dataManager: new DataManager("http://localhost:3000/api/cameras"),
     components: {}
-}
+};
 
 orinoco.cart = new Cart(document.querySelector(".shopping_cart")),
 orinoco.pageManager = new PageManager(document.querySelector("main"));

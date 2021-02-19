@@ -2,7 +2,8 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Orinoco, meilleur site de vente en ligne d'appareil phto argentique. Zurss, Hirsh, Franck, Kuros, Katatone aux prix le plus bas.">      
         <link rel="stylesheet" href="css/style.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
         <title>Orinoco - Vente de caméras en ligne</title>
@@ -25,17 +26,18 @@
                   <label for="menuCheck" class="menu-icon">
                       <i class="fas fa-bars"></i>
                       <i class="fas fa-times"></i>
+                      <div class="text-menu">MENU</div>
                   </label>
 
                   <ul class="menu-list">
-                      <li onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')">Home</li>
-                      <li onclick="orinoco.pageManager.changePage('produit_5be1ed3f1c9d44000030b061', 'Orinoco - Caméras')">Cameras</li>
-                      <li onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')">Panier</li>
-                      <li>Contact</li>
+                      <li><button onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')">Home</button></li> 
+                      <li><button onclick="orinoco.pageManager.changePage('produit_5be1ed3f1c9d44000030b061', 'Orinoco - Caméras')">Cameras</button></li>
+                      <li><button onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')">Panier</button></li>
+                      <li><button>Contact</button></li>
                   </ul>
          </section>
-            <img class="logo"  onclick="orinoco.pageManager.changePage('', 'Orinoco - Vente de caméras en ligne')" src="/img/logo/orinoco.png" alt="Orinoco vente d'appareil photo">
-            <div class="shopping_cart" onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')"></div>
+            <img class="logo" src="/img/logo/orinoco.png" alt="Orinoco vente d'appareil photo">
+            <button class="shopping_cart" onclick="orinoco.pageManager.changePage('panier', 'Orinoco - Mon panier')"></button>
         </header>
      
             

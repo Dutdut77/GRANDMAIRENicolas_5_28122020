@@ -317,7 +317,7 @@ class Panier {
             </div>
 
             <div class="modal-footer">  
-                <div class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</div>
+                <button class="modal-btn" type="button" onclick="orinoco.dataManager.deletePanier()">Retour à l'accueil</button>
             </div>
         </div>
         `;
