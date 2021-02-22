@@ -34,7 +34,7 @@ class Cart {
     /**
      * Ajoute un article dans le panier
      *
-     * @param   {id}  productId  Id de la caméra ajoutée
+     * @param   {string}  productId  Id de la caméra ajoutée
      *
      */
     add(productId) {

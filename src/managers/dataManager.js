@@ -15,9 +15,9 @@ class DataManager {
   }
 
   /**
-   * Récupère tous les données de toutes les cameras
+   * Récupère toutes les données de toutes les cameras
    *
-   * @return  {JSON}  JSON de toutes les cameras
+   * @return  {Object}  JSON de toutes les cameras
    */
   async getAllProducts() {
     const data = await fetch(this.src);
@@ -29,9 +29,9 @@ class DataManager {
   /**
    * Récupère toutes les données d'une seule caméra
    *
-   * @param   {id}  productId  ID d'une caméra
+   * @param   {String}  productId  ID d'une caméra
    *
-   * @return  {JSON}             JSON des données d'une caméra
+   * @return  {Object}             JSON des données d'une caméra
    */
   async getProduct(productId) {
     try{
@@ -48,11 +48,11 @@ class DataManager {
   }
 
   /**
-   * Envoi la validation du panier vers l'API
+   * Envoi le panier validé vers l'API
    *
    * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
-   * @return  {JSON}       Récap de la commande + numéro de commande
+   * @return  {Object}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
     try{
@@ -83,6 +83,9 @@ class DataManager {
    *
    * @param   {String}  productId  Id de la caméra
    *
+   * 
+   * @return  {Object}  Contenu de tous les éléments de la caméra.
+   * 
    */
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {

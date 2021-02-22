@@ -45,7 +45,6 @@ class Produit {
      */
     async selectCamera(nameSelect) {
         let content = "";
-        //let listeName = "";
         const name = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = name.length; i < size; i++) {
             content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`;

@@ -1,63 +1,3 @@
-class Cart {
-
-    content = orinoco.dataManager.reloadCart();
-
-    /**
-     * Insert le nombre d'article dans le panier
-     *
-     * @param   {HTMLElement}  domTarget  .shopping_cart
-     *
-     * @constructor
-     */
-    constructor(domTarget) {
-        this.DOM = document.createElement("cart");
-        this.domTarget = domTarget;
-        this.render();
-    }
-
-    /**
-     * Actualise le nombre d'article dans le panier
-     *
-     * @return  {void}  Nombre d'article dans le panier
-     */
-    render() {
-
-        if (this.content.length > 0) {
-            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
-            this.DOM.innerText = this.content.length;
-            return;
-        }
-        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
-    }
-
-
-    /**
-     * Ajoute un article dans le panier
-     *
-     * @param   {id}  productId  Id de la caméra ajoutée
-     *
-     */
-    add(productId) {
-        this.content.push(productId);
-        this.render();
-        orinoco.dataManager.saveCart(this.content);
-    }
-
-
-    /**
-     * Met à jour le contenu du panier et actualise le rendu
-     *
-     * @param   {Number}  newCart Nombre d'article dans le panier
-     * 
-     * @return  {void}
-     *
-     */
-    updateFromPagePanier(newCart) {
-        this.content = newCart;
-        this.render();
-    }
-
-}
 class Article {
 
     description;
@@ -210,6 +150,66 @@ class Article {
         orinoco.pageManager.changePage("produit_" + this._id, "Orinoco - Caméra " + this.name)
     }
 }
+class Cart {
+
+    content = orinoco.dataManager.reloadCart();
+
+    /**
+     * Insert le nombre d'article dans le panier
+     *
+     * @param   {HTMLElement}  domTarget  .shopping_cart
+     *
+     * @constructor
+     */
+    constructor(domTarget) {
+        this.DOM = document.createElement("cart");
+        this.domTarget = domTarget;
+        this.render();
+    }
+
+    /**
+     * Actualise le nombre d'article dans le panier
+     *
+     * @return  {void}  Nombre d'article dans le panier
+     */
+    render() {
+
+        if (this.content.length > 0) {
+            if (!this.domTarget.hasChildNodes()) this.domTarget.appendChild(this.DOM);
+            this.DOM.innerText = this.content.length;
+            return;
+        }
+        if (this.domTarget.hasChildNodes()) this.domTarget.removeChild(this.DOM);
+    }
+
+
+    /**
+     * Ajoute un article dans le panier
+     *
+     * @param   {string}  productId  Id de la caméra ajoutée
+     *
+     */
+    add(productId) {
+        this.content.push(productId);
+        this.render();
+        orinoco.dataManager.saveCart(this.content);
+    }
+
+
+    /**
+     * Met à jour le contenu du panier et actualise le rendu
+     *
+     * @param   {Number}  newCart Nombre d'article dans le panier
+     * 
+     * @return  {void}
+     *
+     */
+    updateFromPagePanier(newCart) {
+        this.content = newCart;
+        this.render();
+    }
+
+}
 /* global Article orinoco*/
 class Home {
 
@@ -304,7 +304,7 @@ class Panier {
     /**
      * Transforme un array en objet
      *
-     * @param   {Array}  content  la liste des produits
+     * @param   {Array}  content  Tableau des produits du panier
      *
      * @return  {Object}           la liste factorisée en objets
      */
@@ -327,8 +327,8 @@ class Panier {
     /**
      * Affiche la page panier
      *
-     * @param   {HTMLElement}  contenuPanier  Contenu du panier
-     * @param   {HTMLElement}  total          Prix total du panier
+     * @param   {String}  contenuPanier  Contenu du panier en html.
+     * @param   {Number}  total          Prix total du panier
      *
      *  @return  {String}  renvoi le html qui devra être affiché dans le DOM
      */
@@ -416,7 +416,7 @@ class Panier {
     /**
      * Ajout une quantité d'un article donné
      *
-     * @param   {id}  id  ID de la caméra
+     * @param   {string}  id  ID de la caméra
      *
      */
     plus(id) {
@@ -427,7 +427,7 @@ class Panier {
     /**
      * Retire une quantité d'un article donné
      *
-     * @param   {id}  id  ID de la caméra
+     * @param   {string}  id  ID de la caméra
      *
      * 
      */
@@ -440,7 +440,7 @@ class Panier {
     /**
      * Met à jour le contenu du panier
      *
-     * @return  {[type]}  Maj du LocalStorage + Maj du nom d'article dans le panier + Maj de la page Panier
+     * @return  {[void]}  Maj du LocalStorage + Maj du nombre d'article dans le panier + Maj de la page Panier
      */
     updateCount() {
         const newCart = [];
@@ -507,7 +507,7 @@ class Panier {
     /**
      * Affiche sous forme de modal le résultat de la requete
      *
-     * @param   {Json}  data  Formulaire + Panier
+     * @param   {Object}  data  Formulaire + Panier
      *
      * @return  {HTMLElement}        Affiche dans le DOM
      */
@@ -755,7 +755,6 @@ class Produit {
      */
     async selectCamera(nameSelect) {
         let content = "";
-        //let listeName = "";
         const name = await orinoco.dataManager.getAllProducts();
         for (let i = 0, size = name.length; i < size; i++) {
             content += `<option ${nameSelect === name[i].name ? "selected" : ""} value="${name[i]._id}">${name[i].name}</option>`;
@@ -781,9 +780,9 @@ class DataManager {
   }
 
   /**
-   * Récupère tous les données de toutes les cameras
+   * Récupère toutes les données de toutes les cameras
    *
-   * @return  {JSON}  JSON de toutes les cameras
+   * @return  {Object}  JSON de toutes les cameras
    */
   async getAllProducts() {
     const data = await fetch(this.src);
@@ -795,9 +794,9 @@ class DataManager {
   /**
    * Récupère toutes les données d'une seule caméra
    *
-   * @param   {id}  productId  ID d'une caméra
+   * @param   {String}  productId  ID d'une caméra
    *
-   * @return  {JSON}             JSON des données d'une caméra
+   * @return  {Object}             JSON des données d'une caméra
    */
   async getProduct(productId) {
     try{
@@ -814,11 +813,11 @@ class DataManager {
   }
 
   /**
-   * Envoi la validation du panier vers l'API
+   * Envoi le panier validé vers l'API
    *
    * @param   {Array}  user  Tableau comprenant la liste des articles ainsi que les ID des articles commandés
    *
-   * @return  {JSON}       Récap de la commande + numéro de commande
+   * @return  {Object}       Récap de la commande + numéro de commande
    */
   async postPanier(user) {
     try{
@@ -849,6 +848,9 @@ class DataManager {
    *
    * @param   {String}  productId  Id de la caméra
    *
+   * 
+   * @return  {Object}  Contenu de tous les éléments de la caméra.
+   * 
    */
   findInProducts(productId) {
     for (let i = 0, size = this.products.length; i < size; i++) {
