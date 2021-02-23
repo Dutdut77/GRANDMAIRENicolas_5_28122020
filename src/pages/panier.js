@@ -28,8 +28,6 @@ class Panier {
      * 
      */
     async getData(domTarget) {
-        let content = "";
-        let listePanier = [];
         const productId = orinoco.dataManager.reloadCart();
         this.products = await this.cartArrayToCartObject(productId);
         this.render(domTarget);
